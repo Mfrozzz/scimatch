@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "scimatch-a3481": {
+      "hosting": {
+        "scimatch": [
+          "scimatch-a3481"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "scimatch-a3481"
+  }
+}
