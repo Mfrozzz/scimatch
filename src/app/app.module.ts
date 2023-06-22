@@ -13,7 +13,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
