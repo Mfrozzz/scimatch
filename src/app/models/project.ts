@@ -7,9 +7,6 @@ export class Project {
     private _type:string;
     private _docURL:any;
 
-    //private _institute:string;
-    //private _department:string;
-
     public get id():any{
         return this._id;
     }
@@ -56,20 +53,5 @@ export class Project {
     public set docURL(value: any) {
         this._docURL = value;
     }
-
-/*
-    public get institute(): string {
-        return this._institute;
-    }
-    public set institute(value: string) {
-        this._institute = value;
-    }
-
-    public get department(): string {
-        return this._department;
-    }
-    public set department(value: string) {
-        this._department = value;
-    }*/
 
 }

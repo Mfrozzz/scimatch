@@ -12,8 +12,7 @@ export class ProjectFBServiceService {
 
   private PATH: string = 'project';
 
-  constructor(private _angularFirestore: AngularFirestore, private _angularFireStorage: AngularFireStorage
-    ,private  authn:AngularFireAuth/*,private _auth: Auth*/) { }
+  constructor(private _angularFirestore: AngularFirestore, private _angularFireStorage: AngularFireStorage) { }
 
   createProject(project: Project){
     return this._angularFirestore.collection(this.PATH).add({

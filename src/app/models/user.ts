@@ -1,13 +1,15 @@
+import { Department } from "./department";
+import { Institute } from "./institute";
+
 export class User {
     private _id:any;
     private _email:string;
     private _password:string;
     private _name:string;
-    private _institute:string;
-    private _department:string;
+    private _institute:Institute
+    private _department:Department
     private _socialMedias:string;
     private _city: string;
-    //private _projects: Project[] = []
     private _photoURL:any;
     
     public get id():any{
@@ -15,7 +17,7 @@ export class User {
     }
     
     constructor(email:string,password:string,name:string,
-        institute:string,department:string,city:string){
+        institute:Institute,department:Department,city:string){
         this._email=email;
         this._password=password;
         this._name=name;
@@ -46,17 +48,17 @@ export class User {
         this._name = value;
     }
 
-    public get institute(): string {
+    public get institute(): Institute {
         return this._institute;
     }
-    public set institute(value: string) {
+    public set institute(value: Institute) {
         this._institute = value;
     }
 
-    public get department(): string {
+    public get department(): Department {
         return this._department;
     }
-    public set department(value: string) {
+    public set department(value: Department) {
         this._department = value;
     }
 
