@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+body,h1,h2,h3,h4,h5,h6 {font-family: 'Poppins',sans-serif;}
+.w3-bar,h1,button {
+    font-family: 'Poppins',sans-serif;
+
+    font-weight: 600;
+}
+.fa-book,.fa-handshake-o {font-size:200px}
+
+.w3-top{
+    font-family: 'Poppins',sans-serif;
+
+    font-weight: 600;
+}
+
+.w3-bar-item{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.w3-bar{
+    background-color:#fbc02d;
+}
+
+header{
+    background-color: #fff9c4;
+}
+
+
+header button{
+    border-radius: 5px;
+    color: #212121;
+    background-color: #fbc02d;
+}
+
+i{
+    color: #212121;
+}
+
+.w3-row-padding + .w3-row-padding{
+    background-color: #fff9c4;
+}
