@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-body,h1,h2,h3,h4,h5,h6 {font-family: 'Poppins',sans-serif;}
+body,h1,h2,h3,h4,h5,h6 {
+    font-family: 'Poppins',sans-serif;
+}
 .w3-bar,h1,button {
     font-family: 'Poppins',sans-serif;
-
     font-weight: 600;
 }
 .fa-book,.fa-handshake-o {font-size:200px}
@@ -12,6 +13,30 @@ body,h1,h2,h3,h4,h5,h6 {font-family: 'Poppins',sans-serif;}
     font-family: 'Poppins',sans-serif;
 
     font-weight: 600;
+}
+
+header h1{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+p{
+    text-align: justify;
+}
+
+footer p{
+    text-align: center;
+}
+
+footer p i{
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+footer p mat-icon{
+    margin-left: 2em;
+    margin-right: 2em;
+    font-size: 25px;
 }
 
 .w3-bar-item{

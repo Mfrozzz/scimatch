@@ -7,22 +7,13 @@
     <!-- Navbar -->
     <div class="w3-top">
       <div class="w3-bar w3-card w3-left-align w3-large">
-        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-        <a class="w3-bar-item w3-button w3-padding-large w3-white">Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match</a>
-      </div>
-    
-      <!-- Navbar on small screens -->
-      <div class="divLinksS" id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+        <a routerLink="" class="w3-bar-item w3-button w3-padding-large w3-white">Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match</a>
       </div>
     </div>
     
     <!-- Header -->
-    <header class="w3-card w3-center" style="padding:128px 16px">
-      <h1 class="w3-margin w3-jumbo">Bem-Vindo(a)</h1>
+    <header class="w3-card w3-center" style="padding:128px 16px" id="Pagetop">
+      <h1 class="w3-margin w3-jumbo">Seja Bem-Vindo(a)</h1>
       <button class="w3-button w3-padding-large w3-large w3-margin-top w3-margin-right" routerLink="login">Faça Login</button>
       <button class="w3-button w3-padding-large w3-large w3-margin-top w3-margin-left" routerLink="register">Cadastre-se</button>
     </header>
@@ -31,12 +22,16 @@
     <div class="w3-row-padding w3-padding-64 w3-container">
       <div class="w3-content">
         <div class="w3-twothird">
-          <h1>Lorem Ipsum</h1>
-          <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+          <h1>Construa Conhecimento.</h1>
+          <h2 class="w3-padding-32">Construa, Colabore, Participe.</h2>
     
-          <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p class="w3-text-grey">A colaboração e interdisciplinaridade têm se 
+            tornado fundamentais para impulsionar a inovação e enfrentar os desafios 
+            contemporâneos. Nesse contexto, a busca por soluções conjuntas tem se tornado
+            uma estratégia essencial para explorar todo o potencial oferecido pela 
+            comunidade científica. Construindo assim de um cenário 
+            colaborativo e sinérgico, capaz de impulsionar o progresso científico, tecnológico 
+            e social .</p>
         </div>
     
         <div class="w3-third w3-center">
@@ -53,18 +48,29 @@
         </div>
     
         <div class="w3-twothird">
-          <h1>Lorem Ipsum</h1>
-          <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+          <h1>Faça Parcerias.</h1>
+          <h2 class="w3-padding-32">Trabalhe em Conjunto, de qualquer lugar ou instituição.</h2>
     
-          <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p class="w3-text-grey">Descreva problemas e necessidades para o seu projeto, 
+            para que aqueles com o conhecimento e habilidades necessárias entrem em contato. 
+            Com isso decidam se haverá ou não a parceria. Unindo assim, pessoas de 
+            departamentos ou instituições diferentes em prol do desenvolvimento científico em 
+            ambientes acadêmicos.</p>
         </div>
       </div>
     </div>
     
     <!-- Footer -->
     <footer class="w3-container w3-padding-64 w3-center w3-opacity">  
+      <p>© 2023 SciMatch, Inc. 
+        <a href="#Pagetop">
+          <mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>
+        </a>
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+      </p>
       <!-- <div class="w3-xlarge w3-padding-32">
         <i class="fa fa-facebook-official w3-hover-opacity"></i>
         <i class="fa fa-instagram w3-hover-opacity"></i>
