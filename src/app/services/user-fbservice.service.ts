@@ -23,6 +23,7 @@ export class UserFBServiceService {
       email:user.email,
       password:user.password,
       name:user.name,
+      academicRegister:user.academicRegister,
       institute:user.institute,
       department:user.department,
       socialMedias:user.socialMedias,

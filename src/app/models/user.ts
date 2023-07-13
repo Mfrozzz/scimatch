@@ -6,6 +6,7 @@ export class User {
     private _email:string;
     private _password:string;
     private _name:string;
+    private _academicRegister: string;
     private _institute:Institute
     private _department:Department
     private _socialMedias:string;
@@ -16,11 +17,12 @@ export class User {
         return this._id;
     }
     
-    constructor(email:string,password:string,name:string,
+    constructor(email:string,password:string,name:string,academicRegister:string,
         institute:Institute,department:Department,city:string){
         this._email=email;
         this._password=password;
         this._name=name;
+        this._academicRegister=academicRegister;
         this._institute=institute;
         this._department=department;
         this._socialMedias=" ";
@@ -46,6 +48,13 @@ export class User {
     }
     public set name(value: string) {
         this._name = value;
+    }
+
+    public get academicRegister(): string {
+        return this._academicRegister;
+    }
+    public set academicRegister(value: string) {
+        this._academicRegister = value;
     }
 
     public get institute(): Institute {

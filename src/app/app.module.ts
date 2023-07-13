@@ -12,7 +12,12 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule} from '@angular/material/icon'
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { UserHomeComponent } from './pages/user/user-home/user-home.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,7 @@ import {MatIconModule} from '@angular/material/icon'
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    UserHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +35,10 @@ import {MatIconModule} from '@angular/material/icon'
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatDividerModule,
     MatIconModule
   ],
   providers: [],
