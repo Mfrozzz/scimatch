@@ -15,14 +15,14 @@ export class InstituteFbserviceService {
   createInstitute(institute: Institute){
     return this._angularFirestore.collection(this.PATH).add({
       name:institute.name,
-      socialMedias:institute.socialMedias,
+      socialMedias:institute.email,
     });
   }
 
   updateInstitute(institute:Institute,id:string){
     return this._angularFirestore.collection(this.PATH).doc(id).update({
       name:institute.name,
-      socialMedias:institute.socialMedias,
+      socialMedias:institute.email,
     });
   }
 

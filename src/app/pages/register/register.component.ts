@@ -21,7 +21,7 @@ export class RegisterComponent {
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(6)]],
       name: ["", [Validators.required]],
-      academicRegister: ["", [Validators.required]],
+      academicRegister: ["", [Validators.required,Validators.minLength(6),Validators.maxLength(11)]],
     })
 
   }

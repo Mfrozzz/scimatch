@@ -2,7 +2,6 @@ export interface Department {
     id:string;
     idInstitute:string;
     name:string;
-    city:string;
 /*
     private _id:any;
     private _idInstitute!:string;

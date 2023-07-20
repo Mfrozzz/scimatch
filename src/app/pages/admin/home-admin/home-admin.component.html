@@ -1,1 +1,76 @@
-<p>home-admin works!</p>
+<mat-toolbar class="mat-elevation-z8">
+    <div class="title">
+      <span routerLink="/admin">
+        Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
+      </span>
+    </div>
+    <span>
+        <h1 class="titulo">Pagina do Administrador</h1>
+    </span>
+</mat-toolbar>
+<mat-tab-group >
+    <mat-tab label="Criação">
+      <div class="">
+        <h2>Instituição de Ensino</h2>
+        <form>
+            <mat-form-field class="example-full-width">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Ex. UNICENTRO - Universidade Estadual do Centro Oeste" value="">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>E-mail</mat-label>
+                <input matInput placeholder="Ex. exemplo@dominio.com" value="">
+            </mat-form-field>
+            <div class="example-button-row">
+                <button mat-raised-button>Cadastrar</button>
+            </div>
+        </form>
+        <div class="">
+            <h2>Departamento</h2>
+            <form>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Instituição</mat-label>
+                    <input type="text"
+                           placeholder="Escolha."
+                           aria-label="Instituição"
+                           matInput
+                           [formControl]="myControl"
+                           [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of options" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nome</mat-label>
+                    <input matInput placeholder="Ex. DECOMP" value="">
+                </mat-form-field>
+                <div class="example-button-row">
+                    <button mat-raised-button>Cadastrar</button>
+                </div>
+            </form>
+          </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Solicitações">
+      <div class="">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel [expanded]="false" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Titulo
+                </mat-panel-title>
+                <mat-action-row>
+                    <button mat-button color="secundary" type="submit"><mat-icon>delete</mat-icon>></button>
+                  </mat-action-row>
+              </mat-expansion-panel-header>
+          
+                <mat-label>descrição</mat-label>
+
+            </mat-expansion-panel>
+          
+          </mat-accordion>
+      </div>
+    </mat-tab>
+  </mat-tab-group>

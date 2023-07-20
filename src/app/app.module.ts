@@ -24,6 +24,12 @@ import { MyProjectsComponent } from './pages/user/my-projects/my-projects.compon
 import { SearchProjectsComponent } from './pages/user/search-projects/search-projects.component';
 import { SeeUserComponent } from './pages/user/see-user/see-user.component';
 import { HomeAdminComponent } from './pages/admin/home-admin/home-admin.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -53,8 +59,20 @@ import { HomeAdminComponent } from './pages/admin/home-admin/home-admin.componen
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatListModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+/*
+NgIf, MatTabsModule, NgFor, AsyncPipe
+
+MatFormFieldModule, MatInputModule
+*/

@@ -1,7 +1,7 @@
 export interface Institute {
     id:string;
     name:string;
-    socialMedias:string;
+    email:string;
 /*
     private _id:any;
     private _name!:string;

@@ -16,7 +16,7 @@ export class DepartmentFbserviceService {
     return this._angularFirestore.collection(this.PATH).add({
       idInstitute: department.idInstitute,
       name:department.name,
-      city:department.city
+
     });
   }
 
@@ -24,7 +24,7 @@ export class DepartmentFbserviceService {
     return this._angularFirestore.collection(this.PATH).doc(id).update({
       idInstitute: department.idInstitute,
       name:department.name,
-      city:department.city
+
     });
   }
 

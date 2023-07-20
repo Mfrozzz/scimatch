@@ -24,6 +24,9 @@ export class AppComponent {
           if(val.url=='/register'){
             this.showComponent=false;
           }
+          if(val.url=='/admin'){
+            this.showComponent=false;
+          }
           if(val.url==''){
             this.showComponent=false;
           }
