@@ -18,6 +18,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { UserHomeComponent } from './pages/user/user-home/user-home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './pages/user/profile/profile.component';
+import { MyProjectsComponent } from './pages/user/my-projects/my-projects.component';
+import { SearchProjectsComponent } from './pages/user/search-projects/search-projects.component';
+import { SeeUserComponent } from './pages/user/see-user/see-user.component';
+import { HomeAdminComponent } from './pages/admin/home-admin/home-admin.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +32,11 @@ import { UserHomeComponent } from './pages/user/user-home/user-home.component';
     LoginComponent,
     RegisterComponent,
     UserHomeComponent,
+    ProfileComponent,
+    MyProjectsComponent,
+    SearchProjectsComponent,
+    SeeUserComponent,
+    HomeAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +50,9 @@ import { UserHomeComponent } from './pages/user/user-home/user-home.component';
     MatSidenavModule,
     MatButtonModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

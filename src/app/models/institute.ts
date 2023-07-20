@@ -1,4 +1,8 @@
-export class Institute {
+export interface Institute {
+    id:string;
+    name:string;
+    socialMedias:string;
+/*
     private _id:any;
     private _name!:string;
     private _socialMedias!:string;
@@ -25,5 +29,5 @@ export class Institute {
     public set socialMedias(value: string) {
         this._socialMedias = value;
     }
-
+*/
 }

@@ -1,5 +1,11 @@
-export class Project {
-
+export interface Project {
+    id:string;
+    idOwner:string;
+    name:string;
+    description:string;
+    type:string;
+    docURL:any;
+/*
     private _id:any;
     private _idOwner:any;
     private _name:string;
@@ -53,5 +59,5 @@ export class Project {
     public set docURL(value: any) {
         this._docURL = value;
     }
-
+*/
 }

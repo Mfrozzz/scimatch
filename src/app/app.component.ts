@@ -12,15 +12,28 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 export class AppComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  showComponent:boolean=false;
-  router!:Router;
+  showComponent:boolean=true;
 
-  constructor(){
-
+  constructor(private router: Router) {
+    router.events.subscribe(
+      (val)=>{
+        if(val instanceof NavigationEnd){
+          if(val.url=='/login'){
+            this.showComponent=false;
+          }
+          if(val.url=='/register'){
+            this.showComponent=false;
+          }
+          if(val.url==''){
+            this.showComponent=false;
+          }
+        }
+      }
+    )
   }
 
   ngOnInit() {
-
+    
   }
 
 }

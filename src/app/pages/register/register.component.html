@@ -2,30 +2,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
   <div class="container">
-    <form action="#">
+    <form action="#" [formGroup]="form_cadastro" (ngSubmit)="submitForm()">
       <div class="title">
-        <a routerLink="/login">
+        <a routerLink="">
           Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
         </a>
       </div>
       <div class="input-box underline">
-        <input type="email" placeholder="Email" required>
+        <input type="email" placeholder="Email" formControlName="email">
         <div class="underline"></div>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Senha" required>
+        <input type="password" placeholder="Senha" formControlName="password">
         <div class="underline"></div>
       </div>
       <div class="input-box underline">
-        <input type="text" placeholder="Nome" required>
+        <input type="text" placeholder="Nome" formControlName="name">
         <div class="underline"></div>
       </div>
       <div class="input-box underline">
-        <input type="text" placeholder="Registro Acadêmico" required>
+        <input type="text" placeholder="Registro Acadêmico" formControlName="academicRegister">
         <div class="underline"></div>
       </div>
       <div class="input-box button">
-        <input type="submit" name="" value="Cadastrar">
+        <input type="submit" value="Cadastrar">
       </div>
     </form>
       <div class="twitter input-box button">
@@ -35,7 +35,7 @@
       </div>
       <footer>
         <p class="footer-text">
-          Voltar para a <span class="textSpanFooter" routerLink="">Home</span>
+          Já tem cadastro? <span class="textSpanFooter" routerLink="/login">Clique aqui!</span>
         </p>
       </footer>
   </div>

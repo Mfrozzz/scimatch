@@ -1,4 +1,9 @@
-export class Department {
+export interface Department {
+    id:string;
+    idInstitute:string;
+    name:string;
+    city:string;
+/*
     private _id:any;
     private _idInstitute!:string;
     private _name!:string;
@@ -34,4 +39,5 @@ export class Department {
     public set city(value: string) {
         this._city = value;
     }
+*/
 }

@@ -1,8 +1,18 @@
 import { Department } from "./department";
 import { Institute } from "./institute";
 
-export class User {
-    private _id:any;
+export interface User {
+    id:string;
+    email:string;
+    password:string;
+    name:string;
+    academicRegister:string;
+    institute:Institute;
+    department:Department;
+    socialMedias:string[];
+    city:string;
+    photoURL:any;
+/*    private _id:any;
     private _email:string;
     private _password:string;
     private _name:string;
@@ -91,5 +101,5 @@ export class User {
     public set photoURL(value: string) {
         this._photoURL = value;
     }
-
+*/
 }
