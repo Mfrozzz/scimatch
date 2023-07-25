@@ -26,7 +26,6 @@ export class UserFBServiceService {
       academicRegister:user.academicRegister,
       institute:user.institute,
       department:user.department,
-      socialMedias:user.socialMedias,
       city:user.city,
     });
   }

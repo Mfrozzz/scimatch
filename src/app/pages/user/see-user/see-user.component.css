@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+.avatar {
+    margin-left: 0;
+    padding-left: 0;
+    margin-top: 2%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+
+  .pageInfos{
+    justify-content: center;
+    text-align: center;
+  }
+
+  .example-button-container {
+    cursor: pointer;
+    margin-top: 2%;
+    margin-left: 3%;
+    width: 120px;
+  }
+
+  button{
+    background-color: #fbc02d;
+  }
+
+mat-icon{
+    color: #212121;
+}

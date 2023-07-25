@@ -9,7 +9,6 @@ export interface User {
     academicRegister:string;
     institute:Institute;
     department:Department;
-    socialMedias:string[];
     city:string;
     photoURL:any;
 /*    private _id:any;

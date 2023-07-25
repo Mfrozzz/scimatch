@@ -1,1 +1,95 @@
-<p>profile works!</p>
+<div class="tudo">
+    <mat-tab-group dynamicHeight>
+        <mat-tab label="Perfil">
+            <div class="pageInfos">
+                <img class="avatar" src="../assets/images.png"/>
+                <mat-list role="list">
+                    <mat-list-item role="listitem"><mat-icon>email</mat-icon> email</mat-list-item>
+                    <mat-list-item role="listitem"><mat-icon>person</mat-icon> name</mat-list-item>
+                    <mat-list-item role="listitem"><mat-icon>business</mat-icon> institute</mat-list-item>
+                    <mat-list-item role="listitem"><mat-icon>folder</mat-icon> department</mat-list-item>
+                    <mat-list-item role="listitem"><mat-icon>place</mat-icon> city</mat-list-item>
+                </mat-list>
+            </div>
+        </mat-tab>
+        <mat-tab label="Editar Perfil">
+            <div class="parent">
+                <form class="example-form" [formGroup]="profileForm" (ngSubmit)="submitForm()">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Email</mat-label>
+                      <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+                      <mat-error *ngIf="profileForm.hasError('email') && !profileForm.hasError('required')">
+                        Please enter a valid email address
+                      </mat-error>
+                      <mat-error *ngIf="profileForm.hasError('required')">
+                        Email is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Senha</mat-label>
+                        <input type="password" matInput formControlName="password">
+                        <mat-error *ngIf="profileForm.hasError('required') && !profileForm.hasError('minLength(6)')">
+                          Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="profileForm.hasError('minLength(6)')">
+                            Senha Fraca
+                          </mat-error>
+                    </mat-form-field>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Nome</mat-label>
+                        <input type="text" matInput formControlName="name">
+                        <mat-error *ngIf="profileForm.hasError('required')">
+                          Nome is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Registro Acadêmico</mat-label>
+                        <input type="number" matInput formControlName="academicRegister">
+                        <mat-error *ngIf="profileForm.hasError('required') && !profileForm.hasError('minLength(10)')">
+                          Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="profileForm.hasError('minLength(10)') && profileForm.hasError('maxLength(12)')">
+                            RA inválido
+                          </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Instituição</mat-label>
+                        <mat-select>
+                          <mat-option>None</mat-option>
+                          <mat-option *ngFor="let institute of institutes" [value]="institute">{{institute}}</mat-option>
+                        </mat-select>
+            
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Departamento</mat-label>
+                        <mat-select>
+                          <mat-option>None</mat-option>
+                          <mat-option *ngFor="let department of departments" [value]="department">{{department}}</mat-option>
+                        </mat-select>
+            
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Cidade</mat-label>
+                        <input type="text" matInput formControlName="city">
+                        <mat-error *ngIf="profileForm.hasError('required')">
+                          Cidade is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <div>
+                        <label>Avatar</label>
+                        <input type="file" (change)="uploadFile($event.target)" formControlName="photoURL">
+                    </div>
+                    <div class="example-button-row">
+                        <button mat-raised-button>Editar</button>
+                    </div>
+                </form>
+            </div>
+        </mat-tab>
+      </mat-tab-group>
+</div>
+
+<!--
+
+    photoURL:any;
+
+-->
