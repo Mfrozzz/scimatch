@@ -31,6 +31,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
+import { CreateProjectComponent } from './pages/user/project/create-project/create-project.component';
+import { UpdateProjectComponent } from './pages/user/project/update-project/update-project.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import {MatSelectModule} from '@angular/material/select';
     SearchProjectsComponent,
     SeeUserComponent,
     HomeAdminComponent,
+    CreateProjectComponent,
+    UpdateProjectComponent,
   ],
   imports: [
     BrowserModule,

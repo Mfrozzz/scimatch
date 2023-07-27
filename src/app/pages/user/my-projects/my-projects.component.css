@@ -1,0 +1,9 @@
+.projects{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+mat-expansion-panel{
+    margin-top: 3%;
+}

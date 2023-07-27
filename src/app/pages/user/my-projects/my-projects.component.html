@@ -1,1 +1,68 @@
-<p>my-projects works!</p>
+<div class="projects">
+    <button mat-flat-button color="warn" class="buttonNew">Novo Projeto<mat-icon>add-circle</mat-icon></button>
+
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Meus Projetos
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+            <mat-accordion *ngFor="let projeto of projetos">
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                    (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    {{projeto}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>Descricao</p>
+                <p>Tipo</p>
+                <p>Participantes</p>
+                <ul>
+                    <li>participante1</li>
+                    <li>participante2</li>
+                    <li>participante3</li>
+                </ul>
+                <p>DOC</p>
+                <button mat-mini-fab color="warn" class="buttonNew"><mat-icon>delete</mat-icon></button>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <mat-divider></mat-divider>
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Projetos que Participo
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+            <mat-accordion *ngFor="let projeto of projetos">
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                    (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    {{projeto}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>Descricao</p>
+                <p>Tipo</p>
+                <p>Dono</p>
+                <p>instituicao</p>
+                <p>departamento</p>
+                <p>Participantes</p>
+                <ul>
+                    <li>participante1</li>
+                    <li>participante2</li>
+                    <li>participante3</li>
+                </ul>
+                <button mat-mini-fab color="warn" class="buttonNew"><mat-icon>undo</mat-icon></button>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <mat-divider></mat-divider>
+</div>

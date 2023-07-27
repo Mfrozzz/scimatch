@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./my-projects.component.css']
 })
 export class MyProjectsComponent {
+  panelOpenState = false;
+  projetos: string[] = ["projeto 1","projeto 2","projeto 3"];
+  descricoes: string[] = ["descricao 1","descricao 2","descricao 3"];
 
 }
