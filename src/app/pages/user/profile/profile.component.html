@@ -54,15 +54,15 @@
                     </mat-form-field>
                     <mat-form-field class="example-full-width">
                         <mat-label>Instituição</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="institute">
                           <mat-option>None</mat-option>
                           <mat-option *ngFor="let institute of institutes" [value]="institute">{{institute}}</mat-option>
                         </mat-select>
             
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width" >
                         <mat-label>Departamento</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="department">
                           <mat-option>None</mat-option>
                           <mat-option *ngFor="let department of departments" [value]="department">{{department}}</mat-option>
                         </mat-select>
