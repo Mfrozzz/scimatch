@@ -33,6 +33,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 import { CreateProjectComponent } from './pages/user/project/create-project/create-project.component';
 import { UpdateProjectComponent } from './pages/user/project/update-project/update-project.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { UpdateProjectComponent } from './pages/user/project/update-project/upda
     HomeAdminComponent,
     CreateProjectComponent,
     UpdateProjectComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { UpdateProjectComponent } from './pages/user/project/update-project/upda
     MatAutocompleteModule,
     MatListModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

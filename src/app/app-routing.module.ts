@@ -11,6 +11,7 @@ import { MyProjectsComponent } from './pages/user/my-projects/my-projects.compon
 import { HomeAdminComponent } from './pages/admin/home-admin/home-admin.component';
 import { CreateProjectComponent } from './pages/user/project/create-project/create-project.component';
 import { UpdateProjectComponent } from './pages/user/project/update-project/update-project.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path:'project/update',
     component:UpdateProjectComponent
+  },
+  {
+    path:'forgotPassword',
+    component:ForgotPasswordComponent
   }
 ];
 

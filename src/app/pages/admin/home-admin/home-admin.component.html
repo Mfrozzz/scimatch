@@ -8,7 +8,7 @@
         <h1 class="titulo">Pagina do Administrador</h1>
     </span>
 </mat-toolbar>
-<mat-tab-group >
+<mat-tab-group color="accent">
     <mat-tab label="Criação">
       <div class="">
         <h2>Instituição de Ensino</h2>
@@ -22,32 +22,25 @@
                 <input matInput placeholder="Ex. exemplo@dominio.com" value="">
             </mat-form-field>
             <div class="example-button-row">
-                <button mat-raised-button>Cadastrar</button>
+                <button color="accent" mat-raised-button>Cadastrar</button>
             </div>
         </form>
         <div class="">
             <h2>Departamento</h2>
             <form>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Instituição</mat-label>
-                    <input type="text"
-                           placeholder="Escolha."
-                           aria-label="Instituição"
-                           matInput
-                           [formControl]="myControl"
-                           [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete">
-                      <mat-option *ngFor="let option of options" [value]="option">
-                        {{option}}
-                      </mat-option>
-                    </mat-autocomplete>
-                  </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Instituição</mat-label>
+                <mat-select>
+                  <mat-option value="none">None</mat-option>
+                  <mat-option *ngFor="let option of options" [value]="option">{{option}}</mat-option>
+                </mat-select>
+              </mat-form-field>
                 <mat-form-field class="example-full-width">
                     <mat-label>Nome</mat-label>
                     <input matInput placeholder="Ex. DECOMP" value="">
                 </mat-form-field>
                 <div class="example-button-row">
-                    <button mat-raised-button>Cadastrar</button>
+                    <button color="accent" mat-raised-button>Cadastrar</button>
                 </div>
             </form>
           </div>

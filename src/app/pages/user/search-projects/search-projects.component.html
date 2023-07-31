@@ -1,1 +1,44 @@
-<p>search-projects works!</p>
+<div class="parent">
+    <form class="example-form">
+        <mat-form-field class="example-full-width" color="accent">
+        <span matPrefix> </span>
+        <input type="tel" matInput placeholder="Search" name= "search" [(ngModel)]= "search">
+        <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+        </mat-form-field>
+        <br/>
+        {{search}}
+    </form>
+</div>
+<div>
+    <mat-divider></mat-divider>
+    <div class="parent">
+        <mat-chip-listbox *ngFor="let option of options" [value]="option">
+            <mat-chip-option color="accent">{{option}}</mat-chip-option>
+        </mat-chip-listbox>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="seeProjects">
+        <mat-accordion *ngFor="let projeto of projetos">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{projeto}}
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>Descricao</p>
+                <p>Tipo</p>
+                <p>Dono</p>
+                <ul>
+                    <li>Contato - email</li>
+                    <li><span>?chat?</span></li>
+                </ul>
+                <p>DOC</p>
+                <div>
+                    <button mat-flat-button color="accent" class="buttonNew">Solicitar entrada<mat-icon>send</mat-icon></button>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+    </div>
+</div>

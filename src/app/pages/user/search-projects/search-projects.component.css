@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.example-form {
+    min-width: 100px;
+    max-width: 450px;
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+  
+.example-full-width {
+    width: 100%;
+}
+
+.buttonNew{
+    padding: 1%;
+}
+
+.seeProjects{
+    margin-left: 10%;
+    margin-top: 2%;
+    width: 80%;
+}
