@@ -9,6 +9,7 @@ import { Institute } from 'src/app/models/institute';
 })
 export class ProfileComponent {
   profileForm!:FormGroup;
+  uniNotFound: string = "notFound";
   imagem:any;
   isSubmitted: boolean = false;
   institutes: string[] = ['UNICENTRO - Universidade Estadual do Centro Oeste',
@@ -35,6 +36,7 @@ export class ProfileComponent {
       city: ["", [Validators.required]],
       photoURL: ["",[Validators.required]]
     })
+
   }
 
   submitForm(){

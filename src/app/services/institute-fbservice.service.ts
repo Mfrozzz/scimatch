@@ -1,6 +1,18 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Injectable,inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  doc,
+  query,
+  where,
+  addDoc,
+  getDocs,
+  docData,
+  updateDoc,
+  deleteDoc,
+  Firestore,
+  collection,
+  collectionData
+} from '@angular/fire/firestore'
 import { Institute } from '../models/institute';
 
 @Injectable({
@@ -10,31 +22,37 @@ export class InstituteFbserviceService {
 
   private PATH: string = 'institute';
 
-  constructor(private _angularFirestore: AngularFirestore, private _angularFireStorage: AngularFireStorage) { }
+  constructor(private afs:Firestore){
 
-  createInstitute(institute: Institute){
-    return this._angularFirestore.collection(this.PATH).add({
-      name:institute.name,
-      socialMedias:institute.email,
-    });
   }
 
-  updateInstitute(institute:Institute,id:string){
-    return this._angularFirestore.collection(this.PATH).doc(id).update({
-      name:institute.name,
-      socialMedias:institute.email,
-    });
+  readInstitutes(): Observable<Institute[]> {
+    let instRef = collection(this.afs, this.PATH)
+    return collectionData(instRef, {idField: 'id'}) as Observable<Institute[]>
   }
 
-  getInstitute(id:string){
-    return this._angularFirestore.collection(this.PATH).doc(id).valueChanges();
+  readInstitute(id:string):Observable<Institute>{
+    let instRef = doc(this.afs, this.PATH + '/' + id);
+    return docData(instRef) as Observable<Institute>
   }
 
-  getInstitutes(){
-    return this._angularFirestore.collection(this.PATH).snapshotChanges();
+  createInstitute(institute: Institute) {
+    institute.id = doc(collection(this.afs, 'id')).id
+    return addDoc(collection(this.afs, this.PATH), institute)
   }
 
-  deleteInstitute(id:any){
-    return this._angularFirestore.collection(this.PATH).doc(id).delete();
+  
+  async updateinstitute(institute: Institute) {
+    let docRef = doc(this.afs, this.PATH + '/' + institute.id)
+    return await updateDoc(docRef, {
+        name: institute.name,
+        email: institute.email,
+    })
+    .catch(err => alert('Erro ao atualizar institute!'));
+  }
+
+  async deleteinstitute(institute: Institute) {
+    let docRef = doc(this.afs, this.PATH + "/" + institute.id)
+    return await deleteDoc(docRef)
   }
 }

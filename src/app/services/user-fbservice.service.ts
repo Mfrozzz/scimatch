@@ -1,53 +1,61 @@
-import { Injectable } from '@angular/core';
-import { finalize, takeLast } from 'rxjs/operators';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Injectable,inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  doc,
+  query,
+  where,
+  addDoc,
+  getDocs,
+  docData,
+  updateDoc,
+  deleteDoc,
+  Firestore,
+  collection,
+  collectionData
+} from '@angular/fire/firestore'
 import { User } from '../models/user';
-import { Auth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root'
 })
 export class UserFBServiceService {
   private PATH: string = 'user';
 
-  constructor(private _angularFirestore: AngularFirestore, private _angularFireStorage: AngularFireStorage
-    ,private  authn:AngularFireAuth/*,private _auth: Auth*/) { }
+  constructor(private afs:Firestore) { }
 
-  async createUser(user: User){
-    //com login e tal pelo Auth
+  readUsers(): Observable<User[]> {
+    let userRef = collection(this.afs, this.PATH)
+    return collectionData(userRef, {idField: 'id'}) as Observable<User[]>
   }
 
-  updateUser(user:User,id:string){
-    return this._angularFirestore.collection(this.PATH).doc(id).update({
-      email:user.email,
-      password:user.password,
-      name:user.name,
-      academicRegister:user.academicRegister,
-      institute:user.institute,
-      department:user.department,
-      city:user.city,
-    });
+  readUser(id:string):Observable<User>{
+    let userRef = doc(this.afs, this.PATH + '/' + id);
+    return docData(userRef) as Observable<User>
   }
 
-  getUser(id:string){
-    return this._angularFirestore.collection(this.PATH).doc(id).valueChanges();
+  createUser(user: User) {
+    user.id = doc(collection(this.afs, 'id')).id
+    return addDoc(collection(this.afs, this.PATH), user)
+  }
+  
+  async updateUser(user: User) {
+    let docRef = doc(this.afs, this.PATH + '/' + user.id)
+    return await updateDoc(docRef, {
+      email: user.email,
+      password: user.password,
+      name: user.name,
+      academinRegister: user.academicRegister,
+      institute: user.institute,
+      department: user.department,
+      city: user.city,
+      photoURL: user.photoURL
+    })
+    .catch(err => alert('Erro ao atualizar user!'));
   }
 
-  getUsers(){
-    return this._angularFirestore.collection(this.PATH).snapshotChanges();
+  async deleteUser(user: User) {
+    let docRef = doc(this.afs, this.PATH + "/" + user.id)
+    return await deleteDoc(docRef)
   }
-
-  deleteUser(id:any){
-    return this._angularFirestore.collection(this.PATH).doc(id).delete();
-  }
-
-    /**
-   * update
-   * create
-   * update aux
-   * pra foto/url foto/ firebase
-   */
 
     /**
      * login

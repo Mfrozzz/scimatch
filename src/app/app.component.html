@@ -2,46 +2,46 @@
   <mat-toolbar class="mat-elevation-z8">
     <button
     mat-icon-button
-      *ngIf="sidenav.mode === 'over'"
-      (click)="sidenav.toggle()"
-      >
-      <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-    </button>
-    <div class="title">
-      <span routerLink="/userHome">
-        Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
-      </span>
-    </div>
-  </mat-toolbar>
+    *ngIf="sidenav.mode === 'over'"
+    (click)="sidenav.toggle()"
+    >
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  <div class="title">
+    <span routerLink="/userHome">
+      Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
+    </span>
+  </div>
+</mat-toolbar>
 </ng-container>
 
-  
+
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-      <img
-      class="avatar mat-elevation-z8"
-      src="../assets/images.png"
-      />
+    <img
+    class="avatar mat-elevation-z8"
+    src="../assets/images.png"
+    />
       
-      <h4 class="name">((User))</h4>
-      <h4 class="name">((RA))</h4>
+    <h4 class="name">((User))</h4>
+    <h4 class="name">((RA))</h4>
       
-      <mat-divider></mat-divider>
-  
-      <button mat-button class="menu-button" routerLink="/userHome">
-        <mat-icon>home</mat-icon>
-        <span>Home</span>
-      </button>
-      <button mat-button class="menu-button" routerLink="/profile">
-        <mat-icon>person</mat-icon>
-        <span>Perfil</span>
-      </button>
-      <button mat-button class="menu-button" routerLink="/myProjects">
-        <mat-icon>library_books</mat-icon>
-        <span>Meus Projetos</span>
-      </button>
-      <button mat-button class="menu-button" routerLink="/searchProject">
+    <mat-divider></mat-divider>
+    
+    <button mat-button class="menu-button" routerLink="/myProjects">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/profile">
+      <mat-icon>person</mat-icon>
+      <span>Perfil</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/project/create">
+      <mat-icon>library_books</mat-icon>
+      <span>Criar Projeto</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/searchProject">
         <mat-icon>search</mat-icon>
         <span>Buscar Projetos</span>
       </button>
@@ -55,7 +55,6 @@
       <span>Sair</span>
     </button>
   </mat-sidenav>
+  
   <router-outlet></router-outlet>
-
-  </mat-sidenav-container>
-
+</mat-sidenav-container>

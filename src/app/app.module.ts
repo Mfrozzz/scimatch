@@ -35,6 +35,7 @@ import { CreateProjectComponent } from './pages/user/project/create-project/crea
 import { UpdateProjectComponent } from './pages/user/project/update-project/update-project.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     MatListModule,
     MatExpansionModule,
     MatSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

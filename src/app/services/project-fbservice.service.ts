@@ -1,7 +1,18 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Injectable,inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  doc,
+  query,
+  where,
+  addDoc,
+  getDocs,
+  docData,
+  updateDoc,
+  deleteDoc,
+  Firestore,
+  collection,
+  collectionData
+} from '@angular/fire/firestore'
 import { User } from 'firebase/auth';
 import { Project } from '../models/project';
 
@@ -12,39 +23,38 @@ export class ProjectFBServiceService {
 
   private PATH: string = 'project';
 
-  constructor(private _angularFirestore: AngularFirestore, private _angularFireStorage: AngularFireStorage) { }
+  constructor(private afs:Firestore) { }
 
-  createProject(project: Project){
-    return this._angularFirestore.collection(this.PATH).add({
-      idOwner:project.idOwner,
-      name:project.name,
-      description:project.description,
-      type:project.type,
-      docURL:project.docURL
-    });
+  readProjects(): Observable<Project[]> {
+    let projRef = collection(this.afs, this.PATH)
+    return collectionData(projRef, {idField: 'id'}) as Observable<Project[]>
   }
 
-  updateProject(project:Project,id:string){
-    return this._angularFirestore.collection(this.PATH).doc(id).update({
-      //idOwner:project.idOwner,
-      name:project.name,
-      /*institute:project.institute,
-      department:project.department,*/
-      description:project.description,
-      type:project.type,
-    });
+  readProject(id:string):Observable<Project>{
+    let projRef = doc(this.afs, this.PATH + '/' + id);
+    return docData(projRef) as Observable<Project>
   }
 
-  getProject(id:string){
-    return this._angularFirestore.collection(this.PATH).doc(id).valueChanges();
+  createProject(project: Project) {
+    project.id = doc(collection(this.afs, 'id')).id
+    return addDoc(collection(this.afs, this.PATH), project)
+  }
+  
+  async updateProject(project: Project) {
+    let docRef = doc(this.afs, this.PATH + '/' + project.id)
+    return await updateDoc(docRef, {
+      idOwner: project.idOwner,
+      name: project.name,
+      description: project.description,
+      type: project.type,
+      docUrl: project.docURL
+    })
+    .catch(err => alert('Erro ao atualizar project!'));
   }
 
-  getProjects(){
-    return this._angularFirestore.collection(this.PATH).snapshotChanges();
-  }
-
-  deleteProject(id:any){
-    return this._angularFirestore.collection(this.PATH).doc(id).delete();
+  async deleteProject(project: Project) {
+    let docRef = doc(this.afs, this.PATH + "/" + project.id)
+    return await deleteDoc(docRef)
   }
 
   /**

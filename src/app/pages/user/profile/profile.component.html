@@ -57,9 +57,11 @@
                         <mat-select formControlName="institute">
                           <mat-option>None</mat-option>
                           <mat-option *ngFor="let institute of institutes" [value]="institute">{{institute}}</mat-option>
+                          <mat-option [value]="uniNotFound">Minha Instituição não se encontra aqui.</mat-option>
                         </mat-select>
             
-                    </mat-form-field>
+                      </mat-form-field>
+                    
                     <mat-form-field class="example-full-width" >
                         <mat-label>Departamento</mat-label>
                         <mat-select formControlName="department">

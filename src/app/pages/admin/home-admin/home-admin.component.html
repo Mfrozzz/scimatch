@@ -1,4 +1,5 @@
-<mat-toolbar class="mat-elevation-z8">
+<header>
+  <mat-toolbar class="mat-elevation-z8">
     <div class="title">
       <span routerLink="/admin">
         Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
@@ -8,62 +9,66 @@
         <h1 class="titulo">Pagina do Administrador</h1>
     </span>
 </mat-toolbar>
-<mat-tab-group color="accent">
-    <mat-tab label="Criação">
-      <div class="">
-        <h2>Instituição de Ensino</h2>
-        <form>
-            <mat-form-field class="example-full-width">
-                <mat-label>Nome</mat-label>
-                <input matInput placeholder="Ex. UNICENTRO - Universidade Estadual do Centro Oeste" value="">
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>E-mail</mat-label>
-                <input matInput placeholder="Ex. exemplo@dominio.com" value="">
-            </mat-form-field>
-            <div class="example-button-row">
-                <button color="accent" mat-raised-button>Cadastrar</button>
-            </div>
-        </form>
+</header>
+<body>
+  <mat-tab-group color="accent">
+      <mat-tab label="Criação">
         <div class="">
-            <h2>Departamento</h2>
-            <form>
+          <h2>Instituição de Ensino</h2>
+          <form [formGroup]="form_uni" (ngSubmit)="submitFormU()">
               <mat-form-field class="example-full-width">
-                <mat-label>Instituição</mat-label>
-                <mat-select>
-                  <mat-option value="none">None</mat-option>
-                  <mat-option *ngFor="let option of options" [value]="option">{{option}}</mat-option>
-                </mat-select>
+                  <mat-label>Nome</mat-label>
+                  <input matInput placeholder="Ex. UNICENTRO - Universidade Estadual do Centro Oeste" formControlName="name">
               </mat-form-field>
+              <mat-form-field class="example-full-width">
+                  <mat-label>E-mail</mat-label>
+                  <input matInput placeholder="Ex. exemplo@dominio.com" formControlName="email">
+              </mat-form-field>
+              <div class="example-button-row">
+                  <button type="submit" color="accent" mat-raised-button (click)="snackBarUni()">Cadastrar</button>
+              </div>
+          </form>
+          <div class="">
+              <h2>Departamento</h2>
+              <form>
                 <mat-form-field class="example-full-width">
-                    <mat-label>Nome</mat-label>
-                    <input matInput placeholder="Ex. DECOMP" value="">
+                  <mat-label>Instituição</mat-label>
+                  <mat-select>
+                    <mat-option value="none">None</mat-option>
+                    <mat-option *ngFor="let option of options" [value]="option">{{option.name}}</mat-option>
+                  </mat-select>
                 </mat-form-field>
-                <div class="example-button-row">
-                    <button color="accent" mat-raised-button>Cadastrar</button>
-                </div>
-            </form>
-          </div>
-      </div>
-    </mat-tab>
-    <mat-tab label="Solicitações">
-      <div class="">
-        <mat-accordion class="example-headers-align">
-            <mat-expansion-panel [expanded]="false" hideToggle>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Titulo
-                </mat-panel-title>
-                <mat-action-row>
-                    <button mat-button color="secundary" type="submit"><mat-icon>delete</mat-icon>></button>
-                  </mat-action-row>
-              </mat-expansion-panel-header>
-          
-                <mat-label>descrição</mat-label>
-
-            </mat-expansion-panel>
-          
-          </mat-accordion>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+                  <mat-form-field class="example-full-width">
+                      <mat-label>Nome</mat-label>
+                      <input matInput placeholder="Ex. DECOMP" value="">
+                  </mat-form-field>
+                  <div class="example-button-row">
+                      <button color="accent" mat-raised-button>Cadastrar</button>
+                  </div>
+              </form>
+            </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Solicitações">
+        <div class="">
+          <mat-accordion class="example-headers-align">
+              <mat-expansion-panel [expanded]="false" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Titulo
+                  </mat-panel-title>
+                  <mat-action-row>
+                      <button mat-button color="secundary" type="submit"><mat-icon>delete</mat-icon>></button>
+                    </mat-action-row>
+                </mat-expansion-panel-header>
+            
+                  <mat-label>descrição</mat-label>
+  
+              </mat-expansion-panel>
+            
+            </mat-accordion>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  
+</body>
