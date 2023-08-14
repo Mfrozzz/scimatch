@@ -1,1 +1,20 @@
-<p>user-home works!</p>
+<div class="example-button-container">
+    <button mat-mini-fab routerLink="/profile">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+</div>
+<div class="parent">
+    <form class="example-form" [formGroup]="solicitationForm" (ngSubmit)="submitForm()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Título/Assunto</mat-label>
+            <input matInput type="text" formControlName="title">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+          </mat-form-field>
+            <div class="example-button-row">
+                <button type="submit" color="accent" mat-raised-button>Solicitar pedido</button>
+            </div>
+    </form>
+</div>

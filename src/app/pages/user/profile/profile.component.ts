@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Department } from 'src/app/models/department';
 import { Institute } from 'src/app/models/institute';
+import { DepartmentFbserviceService } from 'src/app/services/department-fbservice.service';
+import { InstituteFbserviceService } from 'src/app/services/institute-fbservice.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,19 +12,13 @@ import { Institute } from 'src/app/models/institute';
 })
 export class ProfileComponent {
   profileForm!:FormGroup;
-  uniNotFound: string = "notFound";
   imagem:any;
   isSubmitted: boolean = false;
-  institutes: string[] = ['UNICENTRO - Universidade Estadual do Centro Oeste',
-                       'Centro Universitário UniGuairacá',
-                       'Centro Universitário Campo Real',
-                       'UTFPR - Guarapuava'];
-  departments: string[] = ['DECOMP','DEMED',
-                       'DEFISIO','DEFIS',
-                       'DEAGRO','DECS',
-                       'DEBIO','DEGEO'];
+  institutes: Institute[] = [];
+  departments: Department[] = [];
 
-  constructor(private formBuilder: FormBuilder){
+  constructor(private formBuilder: FormBuilder,private departmentfb: DepartmentFbserviceService,
+    private institutefb: InstituteFbserviceService){
 
   }
 
@@ -36,7 +33,8 @@ export class ProfileComponent {
       city: ["", [Validators.required]],
       photoURL: ["",[Validators.required]]
     })
-
+    this.loadInstitutes()
+    this.loadDepartments()
   }
 
   submitForm(){
@@ -46,6 +44,14 @@ export class ProfileComponent {
     }else{
       this.edit();
     }
+  }
+
+  async loadInstitutes() {
+    return await this.institutefb.readInstitutes().subscribe((data: Institute[]) => {this.institutes = data;})
+  }
+
+  async loadDepartments() {
+    return await this.departmentfb.readDepartments().subscribe((data: Department[]) => {this.departments = data;})
   }
 
   uploadFile(imagem:any){

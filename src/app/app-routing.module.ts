@@ -27,7 +27,7 @@ const routes: Routes = [
     component:RegisterComponent
   },
   {
-    path:'userHome',
+    path:'solicitations',
     component:UserHomeComponent
   },
   {

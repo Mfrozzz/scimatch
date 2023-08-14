@@ -12,8 +12,8 @@
 <div>
     <mat-divider></mat-divider>
     <div class="parent">
-        <mat-chip-listbox *ngFor="let option of options" [value]="option">
-            <mat-chip-option color="accent">{{option}}</mat-chip-option>
+        <mat-chip-listbox *ngFor="let option of options" [value]="option.id">
+            <mat-chip-option color="accent">{{option.name}}</mat-chip-option>
         </mat-chip-listbox>
     </div>
     <mat-divider></mat-divider>

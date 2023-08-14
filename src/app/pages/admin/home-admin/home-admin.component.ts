@@ -7,6 +7,10 @@ import { Router } from '@angular/router';
 import { InstituteFbserviceService } from 'src/app/services/institute-fbservice.service';
 import { Institute } from 'src/app/models/institute';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Department } from 'src/app/models/department';
+import { DepartmentFbserviceService } from 'src/app/services/department-fbservice.service';
+import { Solicitation } from 'src/app/models/solicitation';
+import { SolicitationFbServiceService } from 'src/app/services/solicitation-fb-service.service';
 
 export interface ExampleTab {
   label: string;
@@ -24,23 +28,30 @@ export class HomeAdminComponent {
   isSubmittedU: boolean = false;
   isSubmittedD: boolean = false;
 
-  options:Institute[]=[]
+  options:Institute[]=[];
+  solicitationArray:Solicitation[]=[];
   /*options: string[] = ['UNICENTRO - Universidade Estadual do Centro Oeste',
                        'Centro Universitário UniGuairacá',
                        'Centro Universitário Campo Real',
                        'UTFPR - Guarapuava'];*/
 
-  constructor(private formBuilder: FormBuilder,private _router : Router,
-    private institutefb: InstituteFbserviceService,private _snackBar: MatSnackBar) {
+  constructor(private formBuilder1: FormBuilder,private formBuilder2: FormBuilder,private _router : Router,
+    private institutefb: InstituteFbserviceService,private _snackBar: MatSnackBar,
+    private departmentfb: DepartmentFbserviceService, private solicitationfb: SolicitationFbServiceService) {
 
   }
 
   ngOnInit(){
-    this.form_uni = this.formBuilder.group({
+    this.form_uni = this.formBuilder1.group({
       email: ["", [Validators.required, Validators.email]],
       name: ["", [Validators.required]],
     })
     this.loadInstitutes()
+    this.loadSolicitations()
+    this.form_depto = this.formBuilder2.group({
+      idInstitute: ["", [Validators.required]],
+      name: ["", [Validators.required]],
+    })
   }
 
   submitFormU(){
@@ -71,6 +82,13 @@ export class HomeAdminComponent {
     })
   }
 
+  async deleteSolicitation(id:string){
+    await this.solicitationfb.deleteSolicitation(id);
+    alert('Solicitação excluída com sucesso!');
+  }
+
+  
+
   /*
     private async createConta() {
     let funcionario: Funcionario = {id: '', nome: this.FormCadFunc.controls['nome'].value, telefone: this.FormCadFunc.controls['telefone'].value,
@@ -82,8 +100,11 @@ export class HomeAdminComponent {
   }
   */
 
-  registerDpto(){
-    
+  private async registerDpto(){
+    let dpto: Department = {id:'',name:this.form_depto.controls['name'].value,idInstitute:this.form_depto.controls['idInstitute'].value}
+    await this.departmentfb.createDepartment(dpto).then(() => {
+      console.log(dpto);
+    })
   }
 
   openSnackBar(message: string, action: string) {
@@ -100,5 +121,9 @@ export class HomeAdminComponent {
 
   async loadInstitutes() {
     return await this.institutefb.readInstitutes().subscribe((data: Institute[]) => {this.options = data;})
+  }
+
+  async loadSolicitations(){
+    return await this.solicitationfb.readSolicitations().subscribe((data:Solicitation[])=>{this.solicitationArray = data;})
   }
 }

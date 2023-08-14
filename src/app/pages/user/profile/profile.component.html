@@ -56,20 +56,24 @@
                         <mat-label>Instituição</mat-label>
                         <mat-select formControlName="institute">
                           <mat-option>None</mat-option>
-                          <mat-option *ngFor="let institute of institutes" [value]="institute">{{institute}}</mat-option>
-                          <mat-option [value]="uniNotFound">Minha Instituição não se encontra aqui.</mat-option>
+                          <mat-option *ngFor="let institute of institutes" [value]="institute">{{institute.name}}</mat-option>
                         </mat-select>
-            
                       </mat-form-field>
+                      <mat-list role="list">
+                        <mat-list-item role="listitem"><a routerLink="/solicitations">Minha instituição não está aqui</a></mat-list-item>
+                      </mat-list>
                     
                     <mat-form-field class="example-full-width" >
                         <mat-label>Departamento</mat-label>
                         <mat-select formControlName="department">
                           <mat-option>None</mat-option>
-                          <mat-option *ngFor="let department of departments" [value]="department">{{department}}</mat-option>
+                          <mat-option *ngFor="let department of departments" [value]="department">{{department.name}}</mat-option>
                         </mat-select>
             
                     </mat-form-field>
+                    <mat-list role="list">
+                      <mat-list-item role="listitem"><a routerLink="/solicitations">Meu Departamento não está aqui</a></mat-list-item>
+                    </mat-list>
                     <mat-form-field class="example-full-width">
                         <mat-label>Cidade</mat-label>
                         <input type="text" matInput formControlName="city">

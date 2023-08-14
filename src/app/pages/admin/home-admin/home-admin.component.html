@@ -30,17 +30,17 @@
           </form>
           <div class="">
               <h2>Departamento</h2>
-              <form>
+              <form [formGroup]="form_depto" (ngSubmit)="submitFormD()">
                 <mat-form-field class="example-full-width">
                   <mat-label>Instituição</mat-label>
-                  <mat-select>
+                  <mat-select formControlName="idInstitute">
                     <mat-option value="none">None</mat-option>
-                    <mat-option *ngFor="let option of options" [value]="option">{{option.name}}</mat-option>
+                    <mat-option *ngFor="let option of options" [value]="option.id">{{option.name}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                   <mat-form-field class="example-full-width">
                       <mat-label>Nome</mat-label>
-                      <input matInput placeholder="Ex. DECOMP" value="">
+                      <input matInput placeholder="Ex. DECOMP" formControlName="name">
                   </mat-form-field>
                   <div class="example-button-row">
                       <button color="accent" mat-raised-button>Cadastrar</button>
@@ -52,17 +52,17 @@
       <mat-tab label="Solicitações">
         <div class="">
           <mat-accordion class="example-headers-align">
-              <mat-expansion-panel [expanded]="false" hideToggle>
+              <mat-expansion-panel [expanded]="false" hideToggle *ngFor="let sol of solicitationArray">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    Titulo
+                    {{sol.title}}
                   </mat-panel-title>
                   <mat-action-row>
-                      <button mat-button color="secundary" type="submit"><mat-icon>delete</mat-icon>></button>
+                      <button mat-button color="secundary" (click)="deleteSolicitation(sol.id)"><mat-icon>delete</mat-icon>></button>
                     </mat-action-row>
                 </mat-expansion-panel-header>
             
-                  <mat-label>descrição</mat-label>
+                  <mat-label>{{sol.description}}</mat-label>
   
               </mat-expansion-panel>
             
