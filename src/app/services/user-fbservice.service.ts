@@ -16,6 +16,7 @@ import {
   collectionData
 } from '@angular/fire/firestore'
 import { User } from '../models/user';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +25,7 @@ export class UserFBServiceService {
   auth = getAuth();
   user = this.auth.currentUser;
 
-  constructor(private afs:Firestore,private _auth: Auth) { }
+  constructor(private afs:Firestore,private _auth: Auth,private _router : Router) { }
 
   readUsers(): Observable<User[]> {
     let userRef = collection(this.afs, this.PATH)
@@ -59,65 +60,49 @@ export class UserFBServiceService {
   
   async registerFB(sUser:User){
     this.auth = getAuth()
-    await createUserWithEmailAndPassword(this._auth,sUser.email,sUser.password).then(()=>{
-      let usuario = {
-        id:'',
-        email:sUser.email,
-        name:sUser.name,
-        academicRegister:sUser.academicRegister,
-        photoURL: 'https://firebasestorage.googleapis.com/v0/b/scimatch-a3481.appspot.com/o/defaultPhoto%2Fimages.png?alt=media&token=b410032f-4f98-4fbc-98dd-927b2a1b6c33'
-      }
-      this.createUser(usuario)
-      .then(() => {alert("funcionário cadastrado com sucesso!")})
+    const ususario = await createUserWithEmailAndPassword(this._auth,sUser.email,sUser.password);
+    const idUuid = ususario.user?.uid as string
+    let usuario = {
+      id:idUuid,
+      email:sUser.email,
+      name:sUser.name,
+      academicRegister:sUser.academicRegister,
+      photoURL: 'https://firebasestorage.googleapis.com/v0/b/scimatch-a3481.appspot.com/o/defaultPhoto%2Fimages.png?alt=media&token=b410032f-4f98-4fbc-98dd-927b2a1b6c33'
+    }
+    this.createUser(usuario as User)
+      .then(() => {
+        alert("usuário cadastrado com sucesso!");
+        this._router.navigate(['/login']);
+      })
       .catch((error) => {
-        console.log('testes')
         alert("Ocorreu um erro durante o cadastro, tente novamente!")
         return error
-      })
-    })
-    .catch((error) => {
-      console.log('vixi')
-      alert("Ocorreu um erro durante o cadastro, tente novamente! " + error)
-      return error
+      }).catch((error) => {
+        alert("Ocorreu um erro durante o cadastro, tente novamente! " + error)
+        return error
     })
   }
 
-  createUser(user: any) {
-    user.id = doc(collection(this.afs, 'id')).id
+  async createUser(user: User) {
+    doc(collection(this.afs,user.id)).id
     return addDoc(collection(this.afs, this.PATH), user)
+    /*user.id = doc(collection(this.afs, 'id')).id
+    return addDoc(collection(this.afs, this.PATH), user)*/
   }
-  /*
-      id:string;
-    email:string;
-    password:string;
-    name:string;
-    academicRegister:string;
-    institute:Institute;
-    department:Department;
-    city:string;
-    photoURL:any;
-  createUser(conta: Funcionario, senha: string) {
-    this.authentication()
 
-    createUserWithEmailAndPassword(this.auth, conta.email, senha)
-    .then(() => {
-      let funcionario = {id: '', nome: conta.nome, telefone: conta.telefone, email: conta.email, admin: conta.admin}
-
-      this.funcionarioFs.createFuncionario(funcionario)
-      .then(() => {alert("funcionário cadastrado com sucesso!")})
-      .catch((error) => {
-        console.log('testes')
-        alert("Ocorreu um erro durante o cadastro, tente novamente!")
-        return error
-      })
-    })
-    .catch((error) => {
-      console.log('vixi')
-      alert("Ocorreu um erro durante o cadastro, tente novamente! " + error)
-      return error
-    })
+  async loginFB(email:any,senha:any){
+    this.auth = getAuth();
+    return signInWithEmailAndPassword(this.auth,email,senha)
   }
-  */
+
+  logout(){
+    return signOut(this._auth);
+  }
+
+  usuarioLogged(){//gambiarra
+    this.auth = getAuth();
+    return this.auth.currentUser;
+  }
     /**
      * login
      * logout

@@ -37,6 +37,7 @@ export class RegisterComponent {
 
   async register(){
     await this._userFBService.registerFB(this.form_cadastro.value);
+    this.form_cadastro.reset();
 
   }
 

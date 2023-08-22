@@ -3,22 +3,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <body>
     <div class="container">
-      <form action="#">
+      <form action="#" [formGroup]="form_login" (ngSubmit)="submitForm()">
         <div class="title">
           <a routerLink="">
             Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
           </a>
         </div>
         <div class="input-box underline">
-          <input type="email" placeholder="Email" required>
+          <input type="email" placeholder="Email" formControlName="email">
           <div class="underline"></div>
         </div>
         <div class="input-box">
-          <input type="password" placeholder="Senha" required>
+          <input type="password" placeholder="Senha" formControlName="password">
           <div class="underline"></div>
         </div>
         <div class="input-box button">
-          <input type="submit" name="" value="Entrar">
+          <input type="submit" value="Entrar" routerLink="/myProjects">
         </div>
       </form>
         <div class="twitter input-box button">
