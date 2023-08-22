@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-//import { UserFBServiceService } from 'src/app/services/user-fbservice.service';
+import { UserFBServiceService } from 'src/app/services/user-fbservice.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +12,7 @@ export class RegisterComponent {
   form_cadastro!: FormGroup;
   isSubmitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder,private _router : Router/*,private _userFBService: UserFBServiceService*/){
+  constructor(private formBuilder: FormBuilder,private _router : Router,private _userFBService: UserFBServiceService){
 
   }
 
@@ -36,15 +36,8 @@ export class RegisterComponent {
   }
 
   async register(){
-    //this._userFBService.Adduser(this.form_cadastro.value);
-    //this.form_cadastro.reset();
-    /*
-    this.crudApi.AddStudent(this.studentForm.value);
-    this.toastr.success(
-      this.studentForm.controls['firstName'].value + ' successfully added!'
-    );
-    this.ResetForm();
-    */
+    await this._userFBService.registerFB(this.form_cadastro.value);
+
   }
 
 }
