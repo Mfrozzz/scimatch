@@ -9,8 +9,9 @@ export interface User {
     academicRegister:string;
     institute:Institute;
     department:Department;
-    city:string;
+    phoneNumber:string;
     photoURL:any;
+    admin:boolean;
 /*    private _id:any;
     private _email:string;
     private _password:string;

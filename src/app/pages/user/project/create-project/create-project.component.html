@@ -1,31 +1,95 @@
-<div class="example-button-container">
-    <button mat-mini-fab routerLink="/myProjects">
-      <mat-icon>arrow_back</mat-icon>
+<header>
+  <ng-container>
+    <mat-toolbar class="mat-elevation-z8">
+      <button
+      mat-icon-button
+      *ngIf="sidenav.mode === 'over'"
+      (click)="sidenav.toggle()"
+      >
+      <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
     </button>
-</div>
-<div class="parent">
-    <form class="example-form" [formGroup]="projectForm" (ngSubmit)="submitForm()">
-        <mat-form-field class="example-full-width">
-            <mat-label>Nome do Projeto</mat-label>
-            <input matInput type="text" formControlName="name">
-          </mat-form-field>
+    <div class="title">
+      <span routerLink="/userHome">
+        Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
+      </span>
+    </div>
+  </mat-toolbar>
+  </ng-container>
+</header>
+<body>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+      <img
+      class="avatar mat-elevation-z8"
+      src="../assets/images.png"
+      />
+        
+      <h4 class="name">((User))</h4>
+      <h4 class="name">((RA))</h4>
+        
+      <mat-divider></mat-divider>
+      
+      <button mat-button class="menu-button" routerLink="/myProjects">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button mat-button class="menu-button" routerLink="/profile">
+        <mat-icon>person</mat-icon>
+        <span>Perfil</span>
+      </button>
+      <button mat-button class="menu-button" routerLink="/project/create">
+        <mat-icon>library_books</mat-icon>
+        <span>Criar Projeto</span>
+      </button>
+      <button mat-button class="menu-button" routerLink="/searchProject">
+          <mat-icon>search</mat-icon>
+          <span>Buscar Projetos</span>
+        </button>
+        
+        <mat-divider></mat-divider>
+        
+        <button mat-button class="menu-button"
+        *ngIf="sidenav.mode === 'over'"
+        (click)="sidenav.toggle()" routerLink="">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sair</span>
+      </button>
+    </mat-sidenav>
+    
+
+    <div class="example-button-container">
+      <button mat-mini-fab routerLink="/myProjects">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+  </div>
+  <div class="parent">
+      <form class="example-form" [formGroup]="projectForm" (ngSubmit)="submitForm()">
           <mat-form-field class="example-full-width">
-            <mat-label>Descrição do Projeto</mat-label>
-            <textarea matInput formControlName="description"></textarea>
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <mat-label>Tipo do Projeto</mat-label>
-            <mat-select formControlName="type">
-              <mat-option value="none">None</mat-option>
-              <mat-option *ngFor="let doc of tiposDoc" [value]="doc">{{doc}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-            <div>
-                <label>PDF File</label>
-                <input type="file" (change)="uploadFile($event.target)" formControlName="docURL">
-            </div>
-            <div class="example-button-row">
-                <button type="submit" color="accent" mat-raised-button>Criar Projeto</button>
-            </div>
-    </form>
-</div>
+              <mat-label>Nome do Projeto</mat-label>
+              <input matInput type="text" formControlName="name">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Descrição do Projeto</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Tipo do Projeto</mat-label>
+              <mat-select formControlName="type">
+                <mat-option value="none">None</mat-option>
+                <mat-option *ngFor="let doc of tiposDoc" [value]="doc">{{doc}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+              <div>
+                  <label>PDF File</label>
+                  <input type="file" (change)="uploadFile($event.target)" formControlName="docURL">
+              </div>
+              <div class="example-button-row">
+                  <button type="submit" color="accent" mat-raised-button>Criar Projeto</button>
+              </div>
+      </form>
+  </div>
+
+
+  </mat-sidenav-container>
+</body>

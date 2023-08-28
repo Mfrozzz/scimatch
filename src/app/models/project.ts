@@ -5,6 +5,7 @@ export interface Project {
     description:string;
     type:string;
     docURL:any;
+    institute:string;
 /*
     private _id:any;
     private _idOwner:any;

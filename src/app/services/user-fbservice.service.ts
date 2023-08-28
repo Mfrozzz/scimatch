@@ -47,7 +47,7 @@ export class UserFBServiceService {
       academinRegister: user.academicRegister,
       institute: user.institute,
       department: user.department,
-      city: user.city,
+      phoneNumber: user.phoneNumber,
       photoURL: user.photoURL
     })
     .catch(err => alert('Erro ao atualizar user!'));
@@ -67,7 +67,8 @@ export class UserFBServiceService {
       email:sUser.email,
       name:sUser.name,
       academicRegister:sUser.academicRegister,
-      photoURL: 'https://firebasestorage.googleapis.com/v0/b/scimatch-a3481.appspot.com/o/defaultPhoto%2Fimages.png?alt=media&token=b410032f-4f98-4fbc-98dd-927b2a1b6c33'
+      photoURL: 'https://firebasestorage.googleapis.com/v0/b/scimatch-a3481.appspot.com/o/defaultPhoto%2Fimages.png?alt=media&token=b410032f-4f98-4fbc-98dd-927b2a1b6c33',
+      admin: false
     }
     this.createUser(usuario as User)
       .then(() => {

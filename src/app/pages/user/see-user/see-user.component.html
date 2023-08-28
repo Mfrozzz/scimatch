@@ -1,3 +1,64 @@
+
+<header>
+    <ng-container>
+      <mat-toolbar class="mat-elevation-z8">
+          <button
+        mat-icon-button
+        *ngIf="sidenav.mode === 'over'"
+        (click)="sidenav.toggle()"
+        >
+        <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+        <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+    </button>
+      <div class="title">
+          <span routerLink="/userHome">
+          Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
+        </span>
+      </div>
+    </mat-toolbar>
+</ng-container>
+  </header>
+  <body>
+      <mat-sidenav-container>
+          <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+        <img
+        class="avatar mat-elevation-z8"
+        src="../assets/images.png"
+        />
+        
+        <h4 class="name">((User))</h4>
+        <h4 class="name">((RA))</h4>
+        
+        <mat-divider></mat-divider>
+        
+        <button mat-button class="menu-button" routerLink="/myProjects">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/profile">
+            <mat-icon>person</mat-icon>
+          <span>Perfil</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/project/create">
+            <mat-icon>library_books</mat-icon>
+            <span>Criar Projeto</span>
+        </button>
+        <button mat-button class="menu-button" routerLink="/searchProject">
+            <mat-icon>search</mat-icon>
+            <span>Buscar Projetos</span>
+        </button>
+        
+        <mat-divider></mat-divider>
+        
+        <button mat-button class="menu-button"
+        *ngIf="sidenav.mode === 'over'"
+        (click)="sidenav.toggle()" routerLink="">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Sair</span>
+    </button>
+</mat-sidenav>
+
+
 <div class="example-button-container">
     <button mat-mini-fab routerLink="/searchProject">
       <mat-icon>arrow_back</mat-icon>
@@ -10,6 +71,10 @@
         <mat-list-item role="listitem"><mat-icon>person</mat-icon> name</mat-list-item>
         <mat-list-item role="listitem"><mat-icon>business</mat-icon> institute</mat-list-item>
         <mat-list-item role="listitem"><mat-icon>folder</mat-icon> department</mat-list-item>
-        <mat-list-item role="listitem"><mat-icon>place</mat-icon> city</mat-list-item>
+        <mat-list-item role="listitem"><mat-icon>contact_phone</mat-icon> phoneNumber</mat-list-item>
     </mat-list>
 </div>
+
+
+    </mat-sidenav-container>
+  </body>

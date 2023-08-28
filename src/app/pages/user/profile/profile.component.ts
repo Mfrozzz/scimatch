@@ -30,7 +30,7 @@ export class ProfileComponent {
       academicRegister: ["", [Validators.required,Validators.minLength(6),Validators.maxLength(11)]],
       institute: ["",[Validators.required]],
       department: ["",[Validators.required]],
-      city: ["", [Validators.required]],
+      phoneNumber: ["", [Validators.required]],
       photoURL: ["",[Validators.required]]
     })
     this.loadInstitutes()
