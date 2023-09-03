@@ -36,19 +36,17 @@ export class ProfileComponent {
       this._router.navigate([""]);
     }else{
       this.getUser();
-      if(!this.usuario?.department || !this.usuario.institute || !this.usuario.phoneNumber){
+      if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
         this.snackBarUni()
       }
     }
     this.profileForm = this.formBuilder.group({
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(6)]],
-      name: ["", [Validators.required]],
-      academicRegister: ["", [Validators.required,Validators.minLength(6),Validators.maxLength(11)]],
-      institute: ["",[Validators.required]],
-      department: ["",[Validators.required]],
-      phoneNumber: ["", [Validators.required]],
-      photoURL: ["",[Validators.required]]
+      name: [this.usuario?.name, [Validators.required]],
+      academicRegister: [this.usuario?.academicRegister, [Validators.required,Validators.minLength(6),Validators.maxLength(11)]],
+      institute: [this.usuario?.institute.name,[Validators.required]],
+      department: [this.usuario?.department.name,[Validators.required]],
+      phoneNumber: [this.usuario?.phoneNumber, [Validators.required]],
+      photoURL: [null]
     })
     this.loadInstitutes()
     this.loadDepartments()
@@ -83,12 +81,36 @@ export class ProfileComponent {
     return await this.departmentfb.readDepartments().subscribe((data: Department[]) => {this.departments = data;})
   }
 
-  uploadFile(imagem:any){
-    this.imagem = imagem.files;
+  uploadFile(evento: any){
+    this.imagem = evento.target.files[0];
+    console.log(this.imagem.name)
   }
 
   edit(){
-    
+    let editUser = {
+      id: this.usuario?.id,
+      email: this.usuario?.email,
+      password: this.usuario?.password,
+      name: this.profileForm.controls['name'].value,
+      academicRegister: this.profileForm.controls['academicRegister'].value,
+      institute: this.profileForm.controls['institute'].value,
+      department: this.profileForm.controls['department'].value,
+      phoneNumber: this.profileForm.controls['phoneNumber'].value,
+      photoURL: this.usuario?.photoURL,
+      admin: this.usuario?.admin
+    }
+    if(this.profileForm.controls['photoURL'].value){
+      this._userFBService.updateImg(this.imagem, editUser)
+    }else{
+      this._userFBService.updateUser(editUser)
+    }
+    /*
+    if(this.FormEditProd.controls['foto'].value) {
+      await this.produtoFs.updateImg(this.imagem, produto);
+    }else {
+      await this.produtoFs.updateProduto(produto);
+    }
+    */
   }
 
   redirect(urlDirect: string) {

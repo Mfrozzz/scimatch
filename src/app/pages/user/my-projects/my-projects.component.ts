@@ -32,7 +32,7 @@ export class MyProjectsComponent {
       this._router.navigate([""]);
     }else{
       this.getUser();
-      if(!this.usuario?.department || !this.usuario.institute || !this.usuario.phoneNumber){
+      if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
         this.snackBarUni()
       }
     }

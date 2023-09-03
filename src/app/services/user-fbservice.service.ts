@@ -14,10 +14,12 @@ import {
   Firestore,
   collection,
   collectionData,
-  limit
+  limit,
+  DocumentReference
 } from '@angular/fire/firestore'
 import { User } from '../models/user';
 import { Router } from '@angular/router';
+import { Storage, StorageModule, deleteObject, getDownloadURL, getStorage, ref, uploadBytesResumable } from '@angular/fire/storage';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +28,9 @@ export class UserFBServiceService {
   auth = getAuth();
   user = this.auth.currentUser;
 
-  constructor(private afs:Firestore,private _auth: Auth,private _router : Router) { }
+  constructor(private afs:Firestore,private _auth: Auth,private _router : Router,
+    private fBstorage: Storage) {
+     }
 
   readUsers(): Observable<User[]> {
     let userRef = collection(this.afs, this.PATH)
@@ -51,14 +55,23 @@ export class UserFBServiceService {
     }
   }
 
+  async updateUserID(id:any){
+    let docRef = doc(this.afs, this.PATH + '/' + id);
+    return await updateDoc(docRef,{
+      id: id
+    })
+  }
   
-  async updateUser(user: User) {
+  async updateUser(user: any) {
+    console.log(user.id)
+
+    //let userRef = doc(this.afs, this.PATH + '/' + id);
+
+
     let docRef = doc(this.afs, this.PATH + '/' + user.id)
     return await updateDoc(docRef, {
-      email: user.email,
-      password: user.password,
       name: user.name,
-      academinRegister: user.academicRegister,
+      academicRegister: user.academicRegister,
       institute: user.institute,
       department: user.department,
       phoneNumber: user.phoneNumber,
@@ -74,10 +87,10 @@ export class UserFBServiceService {
   
   async registerFB(sUser:User){
     this.auth = getAuth()
-    const ususario = await createUserWithEmailAndPassword(this._auth,sUser.email,sUser.password);
-    const idUuid = ususario.user?.uid as string
+    const ususario = await createUserWithEmailAndPassword(this._auth,sUser.email,sUser.password)
+    //const idUuid = ususario.user?.uid as string
     let usuario = {
-      id:idUuid,
+      id:'',
       email:sUser.email,
       name:sUser.name,
       academicRegister:sUser.academicRegister,
@@ -85,7 +98,9 @@ export class UserFBServiceService {
       admin: false
     }
     this.createUser(usuario as User)
-      .then(() => {
+      .then((document: DocumentReference) => {
+        //usuario.id = document.id
+        this.updateUserID(document.id)
         alert("usuário cadastrado com sucesso!");
         this._router.navigate(['/login']);
       })
@@ -98,8 +113,49 @@ export class UserFBServiceService {
     })
   }
 
+  updateImg(imagem: any, usuario: any) {
+    const storage = getStorage();
+
+    const firePath = 'https://firebasestorage.googleapis.com/v0/b/scimatch-a3481.appspot.com/o/';
+    const link = usuario.photoURL;
+    let imagePath:string = link.replace(firePath,"");
+    const indexOfEndPath = imagePath.indexOf("?");
+    imagePath = imagePath.substring(0, indexOfEndPath);
+    imagePath = imagePath.replace("%2F","/");
+    const imageRef = ref(storage, imagePath);
+    deleteObject(imageRef).catch((err) => {alert(err);})
+    // Envio da imagem
+    const path = `imagens/${new Date().getTime()}_${imagem.name}`
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    const storageRef = ref(this.fBstorage, path);
+    const uploadTask = uploadBytesResumable(storageRef, imagem);
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.on('state_changed',
+      (snapshot) => {
+      },
+      (error) => {
+        switch (error.code) {
+          case 'storage/unauthorized':
+            alert("Você não possui permissão para isso!")
+            break;
+          case 'storage/canceled':
+            alert('Download cancelado!')
+            break;
+          case 'storage/unknown':
+            alert('Um erro inesperado aconteceu!')
+            break;
+        }
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          usuario.photoURL = downloadURL;
+          this.updateUser(usuario)
+        });
+      })
+  }
+
   async createUser(user: User) {
-    doc(collection(this.afs,user.id)).id
+    //user.id = doc(collection(this.afs,'')).id
     return addDoc(collection(this.afs, this.PATH), user)
     /*user.id = doc(collection(this.afs, 'id')).id
     return addDoc(collection(this.afs, this.PATH), user)*/
@@ -119,8 +175,6 @@ export class UserFBServiceService {
     return this.auth.currentUser;
   }
     /**
-     * login
-     * logout
      * recover password
      */
 }
