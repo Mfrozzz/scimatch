@@ -47,6 +47,7 @@ export class ProjectFBServiceService {
       name: project.name,
       description: project.description,
       type: project.type,
+      members:project.members,
       docUrl: project.docURL
     })
     .catch(err => alert('Erro ao atualizar project!'));

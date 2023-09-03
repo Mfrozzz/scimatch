@@ -13,7 +13,8 @@ import {
   deleteDoc,
   Firestore,
   collection,
-  collectionData
+  collectionData,
+  limit
 } from '@angular/fire/firestore'
 import { User } from '../models/user';
 import { Router } from '@angular/router';
@@ -35,6 +36,19 @@ export class UserFBServiceService {
   readUser(id:string):Observable<User>{
     let userRef = doc(this.afs, this.PATH + '/' + id);
     return docData(userRef) as Observable<User>
+  }
+
+  async getUserByEmail(email: string): Promise<User | null> {
+    const q = query(collection(this.afs, this.PATH), where('email', '==', email), limit(1));
+
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const userSnapshot = querySnapshot.docs[0];
+      return userSnapshot.data() as User;
+    } else {
+      return null;
+    }
   }
 
   

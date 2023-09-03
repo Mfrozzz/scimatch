@@ -36,15 +36,15 @@ export class LoginComponent {
 
   async login(){
     await this._userFBService.loginFB(this.form_login.value['email'],this.form_login.value['password']).then(()=>{
+      let email = this.form_login.controls['email'].value
+      console.log(email)
       this.form_login.reset();
+      this._router.navigateByUrl('/user/' + email,{state: {email:email}});
     }).catch((error) => {
       alert("Ocorreu um erro durante o cadastro, tente novamente!")
       return error
     })
 
-  }
-  goToRegister(){
-    console.log("register")
   }
 
 }

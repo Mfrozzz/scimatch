@@ -12,7 +12,7 @@ import { HomeAdminComponent } from './pages/admin/home-admin/home-admin.componen
 import { CreateProjectComponent } from './pages/user/project/create-project/create-project.component';
 import { UpdateProjectComponent } from './pages/user/project/update-project/update-project.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
-
+// profile project/create search
 const routes: Routes = [
   {
     path:'',
@@ -27,15 +27,15 @@ const routes: Routes = [
     component:RegisterComponent
   },
   {
-    path:'solicitations',
+    path:'user/:param/solicitations',
     component:UserHomeComponent
   },
   {
-    path:'profile',
+    path:'user/:param/profile',
     component:ProfileComponent
   },
   {
-    path:'searchProject',
+    path:'user/:param/search',
     component:SearchProjectsComponent
   },
   {
@@ -43,19 +43,19 @@ const routes: Routes = [
     component:SeeUserComponent
   },
   {
-    path:'myProjects',
+    path:'user/:param',
     component:MyProjectsComponent
   },
   {
-    path:'admin',
+    path:'admin/:param',
     component:HomeAdminComponent
   },
   {
-    path:'project/create',
+    path:'user/:param/project/create',
     component:CreateProjectComponent
   },
   {
-    path:'project/update',
+    path:'user/:param/project/update/:pjc',
     component:UpdateProjectComponent
   },
   {

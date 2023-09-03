@@ -1,11 +1,14 @@
+import { User } from "./user";
+
 export interface Project {
     id:string;
     idOwner:string;
     name:string;
     description:string;
     type:string;
+    members:User[];
+    instituteId:string;
     docURL:any;
-    institute:string;
 /*
     private _id:any;
     private _idOwner:any;

@@ -11,6 +11,8 @@ import { Department } from 'src/app/models/department';
 import { DepartmentFbserviceService } from 'src/app/services/department-fbservice.service';
 import { Solicitation } from 'src/app/models/solicitation';
 import { SolicitationFbServiceService } from 'src/app/services/solicitation-fb-service.service';
+import { User } from 'src/app/models/user';
+import { UserFBServiceService } from 'src/app/services/user-fbservice.service';
 
 export interface ExampleTab {
   label: string;
@@ -27,21 +29,29 @@ export class HomeAdminComponent {
   form_depto!: FormGroup;
   isSubmittedU: boolean = false;
   isSubmittedD: boolean = false;
-
+  email!:string;
+  usuario!: User | null;
   options:Institute[]=[];
   solicitationArray:Solicitation[]=[];
-  /*options: string[] = ['UNICENTRO - Universidade Estadual do Centro Oeste',
-                       'Centro Universitário UniGuairacá',
-                       'Centro Universitário Campo Real',
-                       'UTFPR - Guarapuava'];*/
 
   constructor(private formBuilder1: FormBuilder,private formBuilder2: FormBuilder,private _router : Router,
     private institutefb: InstituteFbserviceService,private _snackBar: MatSnackBar,
-    private departmentfb: DepartmentFbserviceService, private solicitationfb: SolicitationFbServiceService) {
+    private departmentfb: DepartmentFbserviceService, private solicitationfb: SolicitationFbServiceService,
+    private _userFBService: UserFBServiceService) {
 
   }
 
   ngOnInit(){
+    this.email = history.state.email
+    if(this.email == undefined) {
+      alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
+      this._router.navigate([""]);
+    }else{
+      this.getUser();
+      if(!this.usuario?.department || !this.usuario.institute || !this.usuario.phoneNumber){
+        this.snackBarUni()
+      }
+    }
     this.form_uni = this.formBuilder1.group({
       email: ["", [Validators.required, Validators.email]],
       name: ["", [Validators.required]],
@@ -52,6 +62,11 @@ export class HomeAdminComponent {
       idInstitute: ["", [Validators.required]],
       name: ["", [Validators.required]],
     })
+  }
+
+  async getUser(){
+    this.usuario = await this._userFBService?.getUserByEmail(this.email);
+    console.log(this.usuario?.name);
   }
 
   submitFormU(){
@@ -87,19 +102,6 @@ export class HomeAdminComponent {
     alert('Solicitação excluída com sucesso!');
   }
 
-  
-
-  /*
-    private async createConta() {
-    let funcionario: Funcionario = {id: '', nome: this.FormCadFunc.controls['nome'].value, telefone: this.FormCadFunc.controls['telefone'].value,
-    email: this.FormCadFunc.controls['email'].value, admin: this.isAdmin}
-
-    await this.authFireService.createUser(funcionario, this.FormCadFunc.controls['senha'].value);
-
-    this.irParaCadastro()
-  }
-  */
-
   private async registerDpto(){
     let dpto: Department = {id:'',name:this.form_depto.controls['name'].value,idInstitute:this.form_depto.controls['idInstitute'].value}
     await this.departmentfb.createDepartment(dpto).then(() => {
@@ -125,5 +127,9 @@ export class HomeAdminComponent {
 
   async loadSolicitations(){
     return await this.solicitationfb.readSolicitations().subscribe((data:Solicitation[])=>{this.solicitationArray = data;})
+  }
+
+  redirect() {
+    this._router.navigateByUrl('/user/' + this.email,{state: {email:this.email}});
   }
 }

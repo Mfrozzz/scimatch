@@ -10,7 +10,7 @@
       <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
     </button>
     <div class="title">
-      <span routerLink="/userHome">
+      <span (click)="redirect('myProj')">
         Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
       </span>
     </div>
@@ -20,29 +20,26 @@
 <body>
   <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-      <img
-      class="avatar mat-elevation-z8"
-      src="../assets/images.png"
-      />
+      <img class="avatar mat-elevation-z8" [src]="usuario?.photoURL"/>
         
-      <h4 class="name">((User))</h4>
-      <h4 class="name">((RA))</h4>
+      <h4 class="name">{{usuario?.email}}</h4>
+      <h4 class="name">{{usuario?.academicRegister}}</h4>
         
       <mat-divider></mat-divider>
       
-      <button mat-button class="menu-button" routerLink="/myProjects">
+      <button mat-button class="menu-button" (click)="redirect('myProj')">
         <mat-icon>home</mat-icon>
         <span>Home</span>
       </button>
-      <button mat-button class="menu-button" routerLink="/profile">
+      <button mat-button class="menu-button" (click)="redirect('profile')">
         <mat-icon>person</mat-icon>
         <span>Perfil</span>
       </button>
-      <button mat-button class="menu-button" routerLink="/project/create">
+      <button mat-button class="menu-button" (click)="redirect('project/create')">
         <mat-icon>library_books</mat-icon>
         <span>Criar Projeto</span>
       </button>
-      <button mat-button class="menu-button" routerLink="/searchProject">
+      <button mat-button class="menu-button" (click)="redirect('search')">
           <mat-icon>search</mat-icon>
           <span>Buscar Projetos</span>
         </button>
@@ -62,13 +59,13 @@
       <mat-tab-group dynamicHeight color="accent">
           <mat-tab label="Perfil">
               <div class="pageInfos">
-                  <img class="avatar" src="../assets/images.png"/>
+                <img class="avatar mat-elevation-z8" [src]="usuario?.photoURL"/>
                   <mat-list role="list">
-                      <mat-list-item role="listitem"><mat-icon>email</mat-icon> email</mat-list-item>
-                      <mat-list-item role="listitem"><mat-icon>person</mat-icon> name</mat-list-item>
-                      <mat-list-item role="listitem"><mat-icon>business</mat-icon> institute</mat-list-item>
-                      <mat-list-item role="listitem"><mat-icon>folder</mat-icon> department</mat-list-item>
-                      <mat-list-item role="listitem"><mat-icon>contact_phone</mat-icon> phoneNumber</mat-list-item>
+                      <mat-list-item role="listitem"><mat-icon>email</mat-icon> {{usuario?.email}}</mat-list-item>
+                      <mat-list-item role="listitem"><mat-icon>person</mat-icon> {{usuario?.name}}</mat-list-item>
+                      <mat-list-item role="listitem"><mat-icon>business</mat-icon> {{usuario?.institute?.name}}</mat-list-item>
+                      <mat-list-item role="listitem"><mat-icon>folder</mat-icon> {{usuario?.department?.name}}</mat-list-item>
+                      <mat-list-item role="listitem"><mat-icon>contact_phone</mat-icon> {{usuario?.phoneNumber}}</mat-list-item>
                   </mat-list>
               </div>
           </mat-tab>
@@ -120,7 +117,7 @@
                           </mat-select>
                         </mat-form-field>
                         <mat-list role="list">
-                          <mat-list-item role="listitem"><a routerLink="/solicitations">Minha instituição não está aqui</a></mat-list-item>
+                          <mat-list-item role="listitem"><a (click)="redirect('solicitations')">Minha instituição não está aqui</a></mat-list-item>
                         </mat-list>
                       
                       <mat-form-field class="example-full-width" >
@@ -132,7 +129,7 @@
               
                       </mat-form-field>
                       <mat-list role="list">
-                        <mat-list-item role="listitem"><a routerLink="/solicitations">Meu Departamento não está aqui</a></mat-list-item>
+                        <mat-list-item role="listitem"><a (click)="redirect('solicitations')">Meu Departamento não está aqui</a></mat-list-item>
                       </mat-list>
                       <mat-form-field class="example-full-width">
                           <mat-label>phoneNumber</mat-label>
