@@ -127,15 +127,16 @@ export class ProjectFBServiceService {
       description:sProj.description,
       type:sProj.type,
       instituteId:usuario.institute.name,
-      members:sProj.members,
+      members:'',
       docURL:sProj.docURL
     }
+    console.log(project)
     project = project as Project
     await this.createProject(project).then((document: DocumentReference) => {
         //usuario.id = document.id
         console.log(document.id)
         this.updateProjID(document.id)
-        alert("projeto cadastrado com sucesso!");
+        alert("Projeto cadastrado com sucesso!");
         //this._router.navigate(['/login']);
       })
       .catch((error) => {
@@ -158,6 +159,8 @@ export class ProjectFBServiceService {
       type: project.type,
       members:project.members,
       //docUrl: project.docURL
+    }).then(()=>{
+      alert('Projeto editado com sucesso!')
     })
     .catch(err => alert('Erro ao atualizar project! '+err));
   }
@@ -169,6 +172,8 @@ export class ProjectFBServiceService {
       type: project.type,
       members:project.members,
       docUrl: project.docURL
+    }).then(()=>{
+      alert('Projeto editado com sucesso!')
     })
     .catch(err => alert('Erro ao atualizar project! '+err));
   }
@@ -236,7 +241,4 @@ export class ProjectFBServiceService {
         });
       })
   }
-  /**
-   * update
-   */
 }

@@ -75,10 +75,9 @@ export class CreateProjectComponent {
 
   async create(){
     if(this.projectForm.controls['docURL'].value){
-      await this.projectFBservice.enviarProject(this.docs,this.projectForm.value,this.usuario)
+      await this.projectFBservice.enviarProject(this.docs,this.projectForm.value,this.usuario);
       this.projectForm.reset();
     }else{
-      console.log(this.projectForm.value)
       await this.projectFBservice.createProjectMaster(this.projectForm.value,this.usuario!);
       this.projectForm.reset();
       //this.projectFBservice.createProject(this.projectForm.value)

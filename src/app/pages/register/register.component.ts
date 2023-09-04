@@ -29,15 +29,16 @@ export class RegisterComponent {
   submitForm(){
     this.isSubmitted = true;
     if(!this.form_cadastro.valid){
-      console.log("aqui");
+      alert("Campo(s) inválido(s)")
     }else{
       this.register();
     }
   }
 
   async register(){
-    await this._userFBService.registerFB(this.form_cadastro.value);
-    this.form_cadastro.reset();
+    await this._userFBService.registerFB(this.form_cadastro.value).then(()=>{
+      this.form_cadastro.reset();
+    });
 
   }
 

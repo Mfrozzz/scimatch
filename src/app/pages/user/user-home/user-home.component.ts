@@ -46,14 +46,14 @@ export class UserHomeComponent {
   submitForm(){
     this.isSubmitted = true;
     if(!this.solicitationForm.valid){
-      console.log("aqui");
+      alert('Algo em seu formulário está errado.')
     }else{
       this.execute();
     }
   }
 
   private async execute(){
-    await this.solicitationfb.createSolicitationMaster(this.solicitationForm.value,this.usuario?.id)
+    await this.solicitationfb.createSolicitationMaster(this.solicitationForm.value,this.usuario?.id);
   }
 
   redirect(urlDirect: string) {

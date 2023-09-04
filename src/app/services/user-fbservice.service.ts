@@ -76,11 +76,7 @@ export class UserFBServiceService {
   }
   
   async updateUser(user: any) {
-    console.log(user.id)
-
     //let userRef = doc(this.afs, this.PATH + '/' + id);
-
-
     let docRef = doc(this.afs, this.PATH + '/' + user.id)
     return await updateDoc(docRef, {
       name: user.name,
@@ -89,8 +85,9 @@ export class UserFBServiceService {
       department: user.department,
       phoneNumber: user.phoneNumber,
       photoURL: user.photoURL
-    })
-    .catch(err => alert('Erro ao atualizar user!'));
+    }).then(()=>{
+      alert('Usuário alterado com sucesso.')
+    }).catch(err => alert('Erro ao atualizar user!'));
   }
 
   async deleteUser(user: User) {
@@ -114,7 +111,7 @@ export class UserFBServiceService {
       .then((document: DocumentReference) => {
         //usuario.id = document.id
         this.updateUserID(document.id)
-        alert("usuário cadastrado com sucesso!");
+        alert("Usuário cadastrado com sucesso!");
         this._router.navigate(['/login']);
       })
       .catch((error) => {

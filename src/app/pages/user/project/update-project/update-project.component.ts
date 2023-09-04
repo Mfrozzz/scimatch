@@ -25,7 +25,6 @@ export class UpdateProjectComponent {
 
   constructor(private formBuilder: FormBuilder,private _router : Router,
     private _userFBService: UserFBServiceService, private _projFbService: ProjectFBServiceService){
-
   }
 
   ngOnInit(){
