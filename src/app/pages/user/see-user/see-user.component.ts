@@ -22,13 +22,13 @@ export class SeeUserComponent {
   ngOnInit(){
     this.email = history.state.email;
     this.otherEmail = history.state.nUser;
-
-    if(this.email == undefined) {
+    const userLogged = this._userFBService.usuarioLogged()
+    if(this.email == undefined && !userLogged) {
       alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
       this._router.navigate([""]);
     }else{
       this.getUser();
-      if(!this.usuario?.department || !this.usuario.institute || !this.usuario.phoneNumber){
+      if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
         this.snackBarUni()
       }
     }

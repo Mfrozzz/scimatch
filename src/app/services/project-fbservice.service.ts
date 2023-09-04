@@ -66,6 +66,34 @@ export class ProjectFBServiceService {
     }
   }
 
+  async getProjByIdUni(instituteName: any,userID:any): Promise<Project[] | null> {
+    const q = query(collection(this.afs, this.PATH), where('instituteId', '==', instituteName));
+
+    const querySnapshot = await getDocs(q);
+    let projects:Project[] = [];
+
+    if (!querySnapshot.empty) {
+      querySnapshot.forEach((projectsSnapShot)=>{
+        projects.push(projectsSnapShot.data() as Project)
+      })
+      return projects;
+    } else {
+      return null;
+    }
+  }
+
+  async getProjByName(title: any){
+    const q = query(collection(this.afs, this.PATH), where('name', '==', title))
+    let project: any[] = []
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc: any) => {
+      project.push(doc.data() as Observable<Project[]>)
+    });
+
+    return project as Project[]
+  }
+  
+
   async getProjByVddID(id: string): Promise<Project | null> {
     const q = query(collection(this.afs, this.PATH), where('id', '==', id), limit(1));
 
@@ -78,8 +106,6 @@ export class ProjectFBServiceService {
       return null;
     }
   }
-
-
 
   readProject(id:string):Observable<Project>{
     let projRef = doc(this.afs, this.PATH + '/' + id);
@@ -94,8 +120,6 @@ export class ProjectFBServiceService {
   }
 
   async createProjectMaster(sProj:Project,usuario:User){
-    let membros: User[] = []
-    sProj.members = membros
     let project = {
       id:'',
       idOwner:usuario,
@@ -106,7 +130,6 @@ export class ProjectFBServiceService {
       members:sProj.members,
       docURL:sProj.docURL
     }
-    console.log(project)
     project = project as Project
     await this.createProject(project).then((document: DocumentReference) => {
         //usuario.id = document.id
@@ -124,12 +147,22 @@ export class ProjectFBServiceService {
   }
 
   async createProject(project: Project) {
-    //project.id = doc(collection(this.afs, 'id')).id
     return addDoc(collection(this.afs, this.PATH), project)
   }
   
-  async updateProject(project: Project) {
-    let docRef = doc(this.afs, this.PATH + '/' + project.id)
+  async updateProject(project: any,id:string) {
+    let docRef = doc(this.afs, this.PATH + '/' + id)
+    return await updateDoc(docRef, {
+      name: project.name,
+      description: project.description,
+      type: project.type,
+      members:project.members,
+      //docUrl: project.docURL
+    })
+    .catch(err => alert('Erro ao atualizar project! '+err));
+  }
+  async updateProjectCImagem(project: any,id:string) {
+    let docRef = doc(this.afs, this.PATH + '/' + id)
     return await updateDoc(docRef, {
       name: project.name,
       description: project.description,
@@ -137,7 +170,7 @@ export class ProjectFBServiceService {
       members:project.members,
       docUrl: project.docURL
     })
-    .catch(err => alert('Erro ao atualizar project!'));
+    .catch(err => alert('Erro ao atualizar project! '+err));
   }
 
   async deleteProject(project: Project) {
@@ -146,22 +179,14 @@ export class ProjectFBServiceService {
   }
 
   enviarProject(imagem: any, project: any,usuario:any) {
-
     const storage = getStorage()
-
     const path = `projetos/${new Date().getTime()}_${imagem.name}`
-
-    // Upload file and metadata to the object 'images/mountains.jpg'
     const storageRef = ref(storage, path);
     const uploadTask = uploadBytesResumable(storageRef, imagem);
-
-    // Listen for state changes, errors, and completion of the upload.
     uploadTask.on('state_changed',
       (snapshot) => {
       },
       (error) => {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
         switch (error.code) {
           case 'storage/unauthorized':
             alert("Você não possui permissão para isso!")
@@ -175,7 +200,6 @@ export class ProjectFBServiceService {
         }
       },
       () => {
-        // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           project.docURL = downloadURL;
           this.createProjectMaster(project,usuario)
@@ -183,34 +207,12 @@ export class ProjectFBServiceService {
       })
   }
 
-  updateProj(imagem: any, project: Project) {
-    // Primeiro excluir a imagem
+  updateProj(imagem: any, project: any,id:string) {
     const storage = getStorage();
-
-    const firePath = 'https://firebasestorage.googleapis.com/v0/b/scimatch-a3481.appspot.com/o/';
-
-    const link = project.docURL;
-
-    let imagePath:string = link.replace(firePath,"");
-
-    const indexOfEndPath = imagePath.indexOf("?");
-
-    imagePath = imagePath.substring(0, indexOfEndPath);
-
-    imagePath = imagePath.replace("%2F","/");
-
-    const imageRef = ref(storage, imagePath);
-
-    deleteObject(imageRef).catch((err) => {alert(err);})
-
     // Envio da imagem
     const path = `projetos/${new Date().getTime()}_${imagem.name}`
-
-    // Upload file and metadata to the object 'images/mountains.jpg'
     const storageRef = ref(storage, path);
     const uploadTask = uploadBytesResumable(storageRef, imagem);
-
-    // Listen for state changes, errors, and completion of the upload.
     uploadTask.on('state_changed',
       (snapshot) => {
       },
@@ -230,15 +232,11 @@ export class ProjectFBServiceService {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           project.docURL = downloadURL;
-          this.updateProject(project)
+          this.updateProjectCImagem(project,id)
         });
       })
   }
-
   /**
    * update
-   * create
-   * update aux
-   * pro documento/url documento/ firebase
    */
 }

@@ -28,14 +28,12 @@ export class CreateProjectComponent {
 
   ngOnInit(){
     this.email = history.state.email
-    if(this.email == undefined) {
+    const userLogged = this._userFBService.usuarioLogged()
+    if(this.email == undefined && !userLogged) {
       alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
       this._router.navigate([""]);
     }else{
       this.getUser();
-      if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
-        this.snackBarUni()
-      }
     }
     this.projectForm = this.formBuilder.group({
       name: ["", [Validators.required]],
@@ -47,6 +45,9 @@ export class CreateProjectComponent {
 
   async getUser(){
     this.usuario = await this._userFBService?.getUserByEmail(this.email);
+    if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
+      this.snackBarUni()
+    }
   }
 
   openSnackBar(message: string, action: string) {

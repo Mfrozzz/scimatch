@@ -74,19 +74,19 @@
                                       (closed)="panelOpenState = false">
                   <mat-expansion-panel-header>
                       <mat-panel-title>
-                      {{projeto.name}}
+                      Titulo: {{projeto.name}}
                       </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <p>{{projeto.description}}</p>
-                  <p>{{projeto.type}}</p>
-                  <p>Participantes</p>
+                  <p>Descrição do Projeto: {{projeto.description}}</p>
+                  <p>Tipo do projeto: {{projeto.type}}</p>
+                  <p>Participantes do Projeto: </p>
                   <ul *ngFor="let i of projeto.members">
                       <li>{{i}}</li>
                   </ul>
                   <a [href]="projeto.docURL">Documento do Projeto</a>
                   <div>
                     <button mat-mini-fab color="accent" class="buttonNew" (click)="editarProj(projeto)"><mat-icon>edit</mat-icon></button>  
-                    <button mat-mini-fab color="warn" class="buttonNew"><mat-icon>delete</mat-icon></button>
+                    <button mat-mini-fab color="warn" class="buttonNew" (click)="excluirProj(projeto)"><mat-icon>delete</mat-icon></button>
                   </div>
                   </mat-expansion-panel>
               </mat-accordion>

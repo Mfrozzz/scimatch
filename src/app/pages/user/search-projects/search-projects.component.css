@@ -104,3 +104,8 @@ mat-toolbar {
     margin-bottom: 16px;
     background-color: #fff9c4;
   }
+
+  .ponteiro{
+    cursor: pointer;
+    color: rebeccapurple;
+  }

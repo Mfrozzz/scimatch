@@ -38,7 +38,7 @@ export class SolicitationFbServiceService {
     })
   }
 
-  createSolicitationMaster(sSolicitation: Solicitation, owner:string){
+  createSolicitationMaster(sSolicitation: Solicitation, owner:any){
     let solicitacao = {
       id:'',
       idUser:owner,

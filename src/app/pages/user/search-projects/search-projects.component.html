@@ -58,21 +58,21 @@
 </mat-sidenav>
 
 <div class="parent">
-    <form class="example-form">
+    <form class="example-form" [formGroup]="projectForm" (ngSubmit)="submitForm(projectForm.controls['search'].value)">
         <mat-form-field class="example-full-width" color="accent">
         <span matPrefix> </span>
-        <input type="tel" matInput placeholder="Search" name= "search" [(ngModel)]= "search">
-        <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+        <input type="tel" matInput placeholder="Search" name= "search" formControlName="search">
+        <button matSuffix mat-button type="submit"><mat-icon >search</mat-icon></button>
         </mat-form-field>
         <br/>
-        {{search}}
     </form>
 </div>
 <div>
     <mat-divider></mat-divider>
     <div class="parent">
-        <mat-chip-listbox *ngFor="let option of options" [value]="option.id">
-            <mat-chip-option color="accent">{{option.name}}</mat-chip-option>
+        <mat-chip-listbox >
+            <mat-chip-option color="accent" (selectionChange)="teste(option.name,usuario?.email)" [selected]="currentFilter == i" *ngFor="let option of options; let i = index">{{option.name}}</mat-chip-option>
+            <!--<mat-chip-option (selectionChange)="teste(i)" [selected]="currentFilter == i" *ngFor="let item of filters; let i = index">{{ item }}</mat-chip-option>-->
         </mat-chip-listbox>
     </div>
     <mat-divider></mat-divider>
@@ -87,13 +87,13 @@
                 </mat-expansion-panel-header>
                 <p>{{projeto.description}}</p>
                 <p>{{projeto.type}}</p>
-                <a (click)="verUser(projeto.idOwner.email)"><p>{{projeto.idOwner.name}}</p></a>
+                <span class="ponteiro" (click)="verUser(projeto.idOwner.email)"><p>{{projeto.idOwner.name}}</p></span>
                 <ul>
                     <li>Contato - {{projeto.idOwner.email}}</li>
                 </ul>
-                <a [href]="projeto.docURL"><p>Link do Projeto</p></a>
+                <a target="_blank" [href]="projeto.docURL"><p>Link do Projeto</p></a>
                 <div>
-                    <a [href]="zapTarget"><button mat-flat-button color="accent" class="buttonNew" (click)="solicita(projeto.name,projeto.idOwner.phoneNumber)">Solicitar entrada<mat-icon>send</mat-icon></button></a>
+                    <a target="_blank" [href]="zapTarget"><button mat-flat-button color="accent" class="buttonNew" (click)="solicita(projeto.name,projeto.idOwner.phoneNumber)">Solicitar entrada<mat-icon>send</mat-icon></button></a>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

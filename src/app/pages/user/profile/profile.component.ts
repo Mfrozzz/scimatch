@@ -31,15 +31,13 @@ export class ProfileComponent {
 
   ngOnInit(){
     this.email = history.state.email
-    if(this.email == undefined) {
+    const userLogged = this._userFBService.usuarioLogged()
+    if(this.email == undefined && !userLogged) {
       alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
       this._router.navigate([""]);
     }else{
       this.getUser();
-      if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
-        this.snackBarUni()
-      }
-    }    
+    }
     this.loadInstitutes()
     this.loadDepartments()
     this.profileForm = this.formBuilder.group({
@@ -54,6 +52,9 @@ export class ProfileComponent {
 
   async getUser(){
     this.usuario = await this._userFBService?.getUserByEmail(this.email);
+    if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
+      this.snackBarUni()
+    }
   }
 
   openSnackBar(message: string, action: string) {

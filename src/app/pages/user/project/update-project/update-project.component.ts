@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import { Project } from 'src/app/models/project';
 import { User } from 'src/app/models/user';
 import { ProjectFBServiceService } from 'src/app/services/project-fbservice.service';
@@ -20,6 +21,7 @@ export class UpdateProjectComponent {
   usuario!: User | null;
   proj!:string;
   projetoPraEditar!: Project | null; 
+  todosMembros:any = []
 
   constructor(private formBuilder: FormBuilder,private _router : Router,
     private _userFBService: UserFBServiceService, private _projFbService: ProjectFBServiceService){
@@ -29,7 +31,8 @@ export class UpdateProjectComponent {
   ngOnInit(){
     this.email = history.state.email
     this.proj = history.state.proj
-    if(this.email == undefined) {
+    const userLogged = this._userFBService.usuarioLogged()
+    if(this.email == undefined && !userLogged) {
       alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
       this._router.navigate([""]);
     }else{
@@ -69,9 +72,11 @@ export class UpdateProjectComponent {
 
   edit(){
     if(this.projectForm.controls['docURL'].value){
-      this._projFbService.updateProj(this.document, this.projectForm.value)
+      this._projFbService.updateProj(this.document, this.projectForm.value,this.proj)
+      this.projectForm.reset()
     }else{
-      this._projFbService.updateProject(this.projectForm.value)
+      this._projFbService.updateProject(this.projectForm.value,this.proj)
+      this.projectForm.reset()
     }
   }
 

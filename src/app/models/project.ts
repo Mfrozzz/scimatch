@@ -6,7 +6,7 @@ export interface Project {
     name:string;
     description:string;
     type:string;
-    members:User[];
+    members:string;
     instituteId:string;
     docURL:any;
 /*

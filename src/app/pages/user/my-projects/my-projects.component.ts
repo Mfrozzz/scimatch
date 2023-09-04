@@ -29,15 +29,12 @@ export class MyProjectsComponent {
   }
   ngOnInit(){
     this.email = history.state.email
-
-    if(this.email == undefined) {
+    const userLogged = this._userFBService.usuarioLogged()
+    if(this.email == undefined && !userLogged) {
       alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
       this._router.navigate([""]);
     }else{
       this.getUser();
-      if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
-        this.snackBarUni()
-      }
     }
 
     /*const userLogged = this._userFBService.usuarioLogged()
@@ -56,6 +53,9 @@ export class MyProjectsComponent {
   async getUser(){
     this.usuario = await this._userFBService?.getUserByEmail(this.email);
     this.loadMyProjects()
+    if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
+      this.snackBarUni()
+    }
   }
 
   async loadMyProjects() {
@@ -89,5 +89,17 @@ export class MyProjectsComponent {
 
   editarProj(projeto:Project){
     this._router.navigateByUrl('/user/' + this.email + '/project/update/'+projeto.id,{state: {email:this.email,proj:projeto.id}});
+  }
+
+  async excluirProj(projeto:Project){
+    let exclusão = confirm("Deseja excluir seu projeto "+projeto.name+"?")
+    if(exclusão){
+      await this._projectFbS.deleteProject(projeto).then(()=>{
+        alert("Projeto excluirdo com sucesso.")
+      }).catch((error)=>{
+        alert("Erro ao excluir Projeto");
+        console.log(error);
+      })
+    }
   }
 }

@@ -26,7 +26,8 @@ export class UserHomeComponent {
 
   ngOnInit(){
     this.email = history.state.email
-    if(this.email == undefined) {
+    const userLogged = this._userFBService.usuarioLogged()
+    if(this.email == undefined && !userLogged) {
       alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
       this._router.navigate([""]);
     }else{
@@ -52,10 +53,7 @@ export class UserHomeComponent {
   }
 
   private async execute(){
-    let solicitation: Solicitation = {id:'',idUser:this.user.id,title:this.solicitationForm.controls['title'].value,description:this.solicitationForm.controls['description'].value}
-    await this.solicitationfb.createSolicitation(solicitation).then(() => {
-      console.log(solicitation);
-    })
+    await this.solicitationfb.createSolicitationMaster(this.solicitationForm.value,this.usuario?.id)
   }
 
   redirect(urlDirect: string) {
