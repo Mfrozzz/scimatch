@@ -11,7 +11,8 @@ import {
   deleteDoc,
   Firestore,
   collection,
-  collectionData
+  collectionData,
+  DocumentReference
 } from '@angular/fire/firestore'
 import { Solicitation } from '../models/solicitation';
 
@@ -30,8 +31,38 @@ export class SolicitationFbServiceService {
     return collectionData(projRef, {idField: 'id'}) as Observable<Solicitation[]>
   }
 
+  updateSolID(id:any){
+    let docRef = doc(this.afs, this.PATH + '/' + id);
+    return updateDoc(docRef,{
+      id: id
+    })
+  }
+
+  createSolicitationMaster(sSolicitation: Solicitation, owner:string){
+    let solicitacao = {
+      id:'',
+      idUser:owner,
+      title: sSolicitation.title,
+      description:sSolicitation.description
+    }
+    this.createSolicitation(solicitacao as Solicitation)
+    .then((document: DocumentReference) => {
+      //usuario.id = document.id
+      this.updateSolID(document.id)
+      alert("solicitação enviada com sucesso!");
+      //this._router.navigate(['/login']);
+    })
+    .catch((error) => {
+      alert("Ocorreu um erro durante o cadastro, tente novamente!")
+      return error
+    }).catch((error) => {
+      alert("Ocorreu um erro durante o cadastro, tente novamente! " + error)
+      return error
+  })
+  }
+
   createSolicitation(solicitation: Solicitation) {
-    solicitation.id = doc(collection(this.afs, 'id')).id
+    //solicitation.id = doc(collection(this.afs, 'id')).id
     return addDoc(collection(this.afs, this.PATH), solicitation)
   }
 

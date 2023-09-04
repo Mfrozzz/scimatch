@@ -87,14 +87,15 @@ export class HomeAdminComponent {
     }else{
       console.log("aqui");
       this.registerDpto();
+      this.form_depto.reset();
     }
   }
 
   private async registerUni(){
-    let universidade: Institute = {id:'',name:this.form_uni.controls['name'].value,email:this.form_uni.controls['email'].value}
-    await this.institutefb.createInstitute(universidade).then(() => {
+    //let universidade: Institute = {id:'',name:this.form_uni.controls['name'].value,email:this.form_uni.controls['email'].value}
+    await this.institutefb.createInstituteMaster(this.form_uni.value)/*.then(() => {
       console.log(universidade);
-    })
+    })*/
   }
 
   async deleteSolicitation(id:string){
@@ -103,10 +104,10 @@ export class HomeAdminComponent {
   }
 
   private async registerDpto(){
-    let dpto: Department = {id:'',name:this.form_depto.controls['name'].value,idInstitute:this.form_depto.controls['idInstitute'].value}
-    await this.departmentfb.createDepartment(dpto).then(() => {
+    //let dpto: Department = {id:'',name:this.form_depto.controls['name'].value,idInstitute:this.form_depto.controls['idInstitute'].value}
+    await this.departmentfb.createDepartmentMaster(this.form_depto.value)/*.then(() => {
       console.log(dpto);
-    })
+    })*/
   }
 
   openSnackBar(message: string, action: string) {

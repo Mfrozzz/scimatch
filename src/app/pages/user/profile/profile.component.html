@@ -74,14 +74,14 @@
                   <form class="example-form" [formGroup]="profileForm" (ngSubmit)="submitForm()">
                         <mat-form-field class="example-full-width">
                           <mat-label>Nome</mat-label>
-                          <input type="text" matInput formControlName="name">
+                          <input type="text" matInput formControlName="name" placeholder="{{usuario?.name}}">
                           <mat-error *ngIf="profileForm.hasError('required')">
                             Nome is <strong>required</strong>
                           </mat-error>
                       </mat-form-field>
                         <mat-form-field class="example-full-width">
                           <mat-label>Registro Acadêmico</mat-label>
-                          <input type="number" matInput formControlName="academicRegister">
+                          <input type="number" matInput formControlName="academicRegister" placeholder="{{usuario?.academicRegister}}">
                           <mat-error *ngIf="profileForm.hasError('required') && !profileForm.hasError('minLength(10)')">
                             Email is <strong>required</strong>
                           </mat-error>
@@ -91,7 +91,7 @@
                       </mat-form-field>
                       <mat-form-field class="example-full-width">
                           <mat-label>Instituição</mat-label>
-                          <mat-select formControlName="institute">
+                          <mat-select formControlName="institute" placeholder="{{usuario?.institute?.name}}">
                             <mat-option>None</mat-option>
                             <mat-option *ngFor="let institute of institutes" [value]="institute">{{institute.name}}</mat-option>
                           </mat-select>
@@ -102,7 +102,7 @@
                       
                       <mat-form-field class="example-full-width" >
                           <mat-label>Departamento</mat-label>
-                          <mat-select formControlName="department">
+                          <mat-select formControlName="department" placeholder="{{usuario?.department?.name}}">
                             <mat-option>None</mat-option>
                             <mat-option *ngFor="let department of departments" [value]="department">{{department.name}}</mat-option>
                           </mat-select>
@@ -113,7 +113,7 @@
                       </mat-list>
                       <mat-form-field class="example-full-width">
                           <mat-label>phoneNumber</mat-label>
-                          <input type="text" matInput formControlName="phoneNumber">
+                          <input type="text" matInput formControlName="phoneNumber" placeholder="{{usuario?.phoneNumber}}">
                           <mat-error *ngIf="profileForm.hasError('required')">
                             phoneNumber is <strong>required</strong>
                           </mat-error>

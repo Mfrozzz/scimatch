@@ -67,22 +67,22 @@
       <form class="example-form" [formGroup]="projectForm" (ngSubmit)="submitForm()">
           <mat-form-field class="example-full-width">
               <mat-label>Nome do Projeto</mat-label>
-              <input matInput type="text" formControlName="name">
+              <input matInput type="text" formControlName="name" placeholder="{{projetoPraEditar?.name}}">
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Descrição do Projeto</mat-label>
-              <textarea matInput formControlName="description"></textarea>
+              <textarea matInput formControlName="description" placeholder="{{projetoPraEditar?.description}}"></textarea>
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Tipo do Projeto</mat-label>
-              <mat-select formControlName="type">
+              <mat-select formControlName="type" placeholder="{{projetoPraEditar?.type}}">
                 <mat-option value="none">None</mat-option>
                 <mat-option *ngFor="let doc of tiposDoc" [value]="doc">{{doc}}</mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Participantes do Projeto</mat-label>
-              <input matInput type="text" formControlName="members">
+              <input matInput type="text" formControlName="members" placeholder="{{projetoPraEditar?.members}}">
             </mat-form-field>
               <div>
                   <label>PDF File</label>

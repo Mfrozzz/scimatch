@@ -39,7 +39,7 @@ const routes: Routes = [
     component:SearchProjectsComponent
   },
   {
-    path:'seeUser',
+    path:'user/:param/u/:user',
     component:SeeUserComponent
   },
   {

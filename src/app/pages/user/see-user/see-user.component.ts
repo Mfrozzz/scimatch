@@ -11,14 +11,18 @@ import { UserFBServiceService } from 'src/app/services/user-fbservice.service';
 })
 export class SeeUserComponent {
   email!:string;
+  otherEmail!:string;
   usuario!: User | null;
+  other!: User | null;
   constructor(private _userFBService: UserFBServiceService,private _router : Router,
     private _snackBar: MatSnackBar){
 
   }
 
   ngOnInit(){
-    this.email = history.state.email
+    this.email = history.state.email;
+    this.otherEmail = history.state.nUser;
+
     if(this.email == undefined) {
       alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
       this._router.navigate([""]);
@@ -51,5 +55,6 @@ export class SeeUserComponent {
 
   async getUser(){
     this.usuario = await this._userFBService?.getUserByEmail(this.email);
+    this.other = await this._userFBService?.getUserByEmail(this.otherEmail);
   }
 }

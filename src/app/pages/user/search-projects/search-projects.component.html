@@ -77,24 +77,23 @@
     </div>
     <mat-divider></mat-divider>
     <div class="seeProjects">
-        <mat-accordion *ngFor="let projeto of projetos">
+        <mat-accordion *ngFor="let projeto of projs">
             <mat-expansion-panel (opened)="panelOpenState = true"
                                 (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                 <mat-panel-title>
-                    {{projeto}}
+                    {{projeto.name}}
                 </mat-panel-title>
                 </mat-expansion-panel-header>
-                <p>Descricao</p>
-                <p>Tipo</p>
-                <p>Dono</p>
+                <p>{{projeto.description}}</p>
+                <p>{{projeto.type}}</p>
+                <a (click)="verUser(projeto.idOwner.email)"><p>{{projeto.idOwner.name}}</p></a>
                 <ul>
-                    <li>Contato - email</li>
-                    <li><span>?chat?</span></li>
+                    <li>Contato - {{projeto.idOwner.email}}</li>
                 </ul>
-                <p>DOC</p>
+                <a [href]="projeto.docURL"><p>Link do Projeto</p></a>
                 <div>
-                    <button mat-flat-button color="accent" class="buttonNew">Solicitar entrada<mat-icon>send</mat-icon></button>
+                    <a [href]="zapTarget"><button mat-flat-button color="accent" class="buttonNew" (click)="solicita(projeto.name,projeto.idOwner.phoneNumber)">Solicitar entrada<mat-icon>send</mat-icon></button></a>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

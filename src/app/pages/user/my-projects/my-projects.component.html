@@ -10,7 +10,7 @@
       <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
     </button>
     <div class="title">
-      <span (click)="redirect('myProj')">
+      <span (click)="checkAdm('myProj')">
         Sci<mat-icon fontIcon="lightbulb" aria-hidden="false"></mat-icon>Match
       </span>
     </div>
@@ -69,25 +69,23 @@
                 Meus Projetos
               </mat-panel-title>
             </mat-expansion-panel-header>
-              <mat-accordion *ngFor="let projeto of projetos">
+              <mat-accordion *ngFor="let projeto of myProj">
                   <mat-expansion-panel (opened)="panelOpenState = true"
                                       (closed)="panelOpenState = false">
                   <mat-expansion-panel-header>
                       <mat-panel-title>
-                      {{projeto}}
+                      {{projeto.name}}
                       </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <p>Descricao</p>
-                  <p>Tipo</p>
+                  <p>{{projeto.description}}</p>
+                  <p>{{projeto.type}}</p>
                   <p>Participantes</p>
-                  <ul>
-                      <li>participante1</li>
-                      <li>participante2</li>
-                      <li>participante3</li>
+                  <ul *ngFor="let i of projeto.members">
+                      <li>{{i}}</li>
                   </ul>
-                  <p>DOC</p>
+                  <a [href]="projeto.docURL">Documento do Projeto</a>
                   <div>
-                    <button mat-mini-fab color="accent" class="buttonNew" routerLink="/project/update"><mat-icon>edit</mat-icon></button>  
+                    <button mat-mini-fab color="accent" class="buttonNew" (click)="editarProj(projeto)"><mat-icon>edit</mat-icon></button>  
                     <button mat-mini-fab color="warn" class="buttonNew"><mat-icon>delete</mat-icon></button>
                   </div>
                   </mat-expansion-panel>

@@ -39,7 +39,9 @@ export class ProfileComponent {
       if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
         this.snackBarUni()
       }
-    }
+    }    
+    this.loadInstitutes()
+    this.loadDepartments()
     this.profileForm = this.formBuilder.group({
       name: [this.usuario?.name, [Validators.required]],
       academicRegister: [this.usuario?.academicRegister, [Validators.required,Validators.minLength(6),Validators.maxLength(11)]],
@@ -48,8 +50,6 @@ export class ProfileComponent {
       phoneNumber: [this.usuario?.phoneNumber, [Validators.required]],
       photoURL: [null]
     })
-    this.loadInstitutes()
-    this.loadDepartments()
   }
 
   async getUser(){

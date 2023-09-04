@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { ProjectFBServiceService } from 'src/app/services/project-fbservice.service';
 import { UserFBServiceService } from 'src/app/services/user-fbservice.service';
 
 @Component({
@@ -17,9 +18,11 @@ export class CreateProjectComponent {
   isSubmitted: boolean = false;
   email!:string;
   usuario!: User | null;
+  docs:any;
 
   constructor(private formBuilder: FormBuilder,private _router : Router,
-    private _userFBService: UserFBServiceService,private _snackBar: MatSnackBar){
+    private _userFBService: UserFBServiceService,private _snackBar: MatSnackBar,
+    private projectFBservice: ProjectFBServiceService){
 
   }
 
@@ -30,7 +33,7 @@ export class CreateProjectComponent {
       this._router.navigate([""]);
     }else{
       this.getUser();
-      if(!this.usuario?.department || !this.usuario.institute || !this.usuario.phoneNumber){
+      if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
         this.snackBarUni()
       }
     }
@@ -38,7 +41,7 @@ export class CreateProjectComponent {
       name: ["", [Validators.required]],
       description: ["", [Validators.required]],
       type: ["",[Validators.required]],
-      docURL: ["",[Validators.required]]
+      docURL: [null]
     })
   }
 
@@ -59,16 +62,26 @@ export class CreateProjectComponent {
     if(!this.projectForm.valid){
       console.log("aqui");
     }else{
-      this.edit();
+      this.create();
+      alert('foi')
     }
   }
 
-  uploadFile(document:any){
-    this.document = document.files;
+  uploadFile(evento: any){
+    this.docs = evento.target.files[0];
+    console.log(this.docs.name)
   }
 
-  edit(){
-    
+  async create(){
+    if(this.projectForm.controls['docURL'].value){
+      await this.projectFBservice.enviarProject(this.docs,this.projectForm.value,this.usuario)
+      this.projectForm.reset();
+    }else{
+      console.log(this.projectForm.value)
+      await this.projectFBservice.createProjectMaster(this.projectForm.value,this.usuario!);
+      this.projectForm.reset();
+      //this.projectFBservice.createProject(this.projectForm.value)
+    }
   }
 
   redirect(urlDirect: string) {

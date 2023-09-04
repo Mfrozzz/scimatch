@@ -60,18 +60,18 @@
 
 
 <div class="example-button-container">
-    <button mat-mini-fab routerLink="/searchProject">
+    <button mat-mini-fab (click)="redirect('search')">
       <mat-icon>arrow_back</mat-icon>
     </button>
 </div>
 <div class="pageInfos">
-    <img class="avatar" src="../assets/images.png"/>
+  <img class="avatar mat-elevation-z8"[src]="other?.photoURL"/>
     <mat-list role="list">
-        <mat-list-item role="listitem"><mat-icon>email</mat-icon> email</mat-list-item>
-        <mat-list-item role="listitem"><mat-icon>person</mat-icon> name</mat-list-item>
-        <mat-list-item role="listitem"><mat-icon>business</mat-icon> institute</mat-list-item>
-        <mat-list-item role="listitem"><mat-icon>folder</mat-icon> department</mat-list-item>
-        <mat-list-item role="listitem"><mat-icon>contact_phone</mat-icon> phoneNumber</mat-list-item>
+        <mat-list-item role="listitem"><mat-icon>email</mat-icon> {{other?.email}}</mat-list-item>
+        <mat-list-item role="listitem"><mat-icon>person</mat-icon> {{other?.name}}</mat-list-item>
+        <mat-list-item role="listitem"><mat-icon>business</mat-icon> {{other?.institute?.name}}</mat-list-item>
+        <mat-list-item role="listitem"><mat-icon>folder</mat-icon> {{other?.department?.name}}</mat-list-item>
+        <mat-list-item role="listitem"><mat-icon>contact_phone</mat-icon> {{other?.phoneNumber}}</mat-list-item>
     </mat-list>
 </div>
 

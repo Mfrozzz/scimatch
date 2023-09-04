@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Institute } from 'src/app/models/institute';
 import { User } from 'src/app/models/user';
 import { InstituteFbserviceService } from 'src/app/services/institute-fbservice.service';
+import { ProjectFBServiceService } from 'src/app/services/project-fbservice.service';
 import { UserFBServiceService } from 'src/app/services/user-fbservice.service';
 
 @Component({
@@ -18,10 +19,14 @@ export class SearchProjectsComponent {
   projetos: string[] = ["projeto 1","projeto 2","projeto 3"];
   descricoes: string[] = ["descricao 1","descricao 2","descricao 3"];
   email!:string;
+  projs:any = [];
   usuario!: User | null;
+  other!: User | null;
+  zapTarget:any;
 
   constructor(private institutefb: InstituteFbserviceService,private _router : Router,
-    private _userFBService: UserFBServiceService,private _snackBar: MatSnackBar){}
+    private _userFBService: UserFBServiceService,private _snackBar: MatSnackBar,
+    private _projectFbS: ProjectFBServiceService){}
 
   ngOnInit(){
     this.email = history.state.email
@@ -37,8 +42,14 @@ export class SearchProjectsComponent {
     }
   }
 
+  async loadAllProjects() {
+    this.projs = await this._projectFbS.getProjByIdReverse(this.usuario?.id)
+    this.other = await this._userFBService.getUserByVddID(this.projs.idOwner)
+  }
+
   async getUser(){
     this.usuario = await this._userFBService?.getUserByEmail(this.email);
+    this.loadAllProjects()
   }
 
   openSnackBar(message: string, action: string) {
@@ -62,5 +73,19 @@ export class SearchProjectsComponent {
     }else{
       this._router.navigateByUrl('/user/' + this.email + '/' + urlDirect,{state: {email:this.email}});
     }
+  }
+
+  verUser(rota:string){
+    this._router.navigateByUrl('/user/' + this.email + '/u/'+rota,{state: {email:this.email,nUser:rota}});
+  }
+
+  solicita(projeName:string,phone:string){
+    console.log(projeName)
+    console.log(phone)
+    const newText = phone.replace('+','');
+    console.log(newText)
+    let msg = "Olá, me interessei em seu projeto "+projeName+" gostaria de saber mais sobre, e como posso te ajudar!"
+    let target = `https://api.whatsapp.com/send?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(msg)}`
+    this.zapTarget = target
   }
 }

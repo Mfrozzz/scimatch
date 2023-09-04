@@ -55,6 +55,19 @@ export class UserFBServiceService {
     }
   }
 
+  async getUserByVddID(id: string): Promise<User | null> {
+    const q = query(collection(this.afs, this.PATH), where('id', '==', id), limit(1));
+
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const userSnapshot = querySnapshot.docs[0];
+      return userSnapshot.data() as User;
+    } else {
+      return null;
+    }
+  }
+
   async updateUserID(id:any){
     let docRef = doc(this.afs, this.PATH + '/' + id);
     return await updateDoc(docRef,{
@@ -94,7 +107,7 @@ export class UserFBServiceService {
       email:sUser.email,
       name:sUser.name,
       academicRegister:sUser.academicRegister,
-      photoURL: 'https://firebasestorage.googleapis.com/v0/b/scimatch-a3481.appspot.com/o/defaultPhoto%2Fimages.png?alt=media&token=b410032f-4f98-4fbc-98dd-927b2a1b6c33',
+      photoURL: 'https://firebasestorage.googleapis.com/v0/b/scimatch-a3481.appspot.com/o/defaultPhoto%2Fimages.png?alt=media&token=1870a793-b139-4149-addb-db368ce46ecd',
       admin: false
     }
     this.createUser(usuario as User)
@@ -114,7 +127,7 @@ export class UserFBServiceService {
   }
 
   updateImg(imagem: any, usuario: any) {
-    const storage = getStorage();
+    /*const storage = getStorage();
 
     const firePath = 'https://firebasestorage.googleapis.com/v0/b/scimatch-a3481.appspot.com/o/';
     const link = usuario.photoURL;
@@ -123,7 +136,7 @@ export class UserFBServiceService {
     imagePath = imagePath.substring(0, indexOfEndPath);
     imagePath = imagePath.replace("%2F","/");
     const imageRef = ref(storage, imagePath);
-    deleteObject(imageRef).catch((err) => {alert(err);})
+    deleteObject(imageRef).catch((err) => {alert(err);})*/
     // Envio da imagem
     const path = `imagens/${new Date().getTime()}_${imagem.name}`
     // Upload file and metadata to the object 'images/mountains.jpg'

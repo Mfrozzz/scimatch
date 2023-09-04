@@ -11,7 +11,8 @@ import {
   deleteDoc,
   Firestore,
   collection,
-  collectionData
+  collectionData,
+  DocumentReference
 } from '@angular/fire/firestore'
 import { Department } from '../models/department';
 
@@ -34,8 +35,37 @@ export class DepartmentFbserviceService {
     return docData(dptoRef) as Observable<Department>
   }
 
+  createDepartmentMaster(sDepartment: any){
+    let department = {
+      id:'',
+      name:sDepartment.name,
+      idIntitute:sDepartment.idInstitute
+    }
+    this.createDepartment(department as unknown as Department)
+      .then((document: DocumentReference) => {
+        //usuario.id = document.id
+        this.updateDptoID(document.id)
+        alert("Departamento cadastrado com sucesso!");
+        //this._router.navigate(['/login']);
+      })
+      .catch((error) => {
+        alert("Ocorreu um erro durante o cadastro, tente novamente!")
+        return error
+      }).catch((error) => {
+        alert("Ocorreu um erro durante o cadastro, tente novamente! " + error)
+        return error
+    })
+  }
+
+  async updateDptoID(id:any){
+    let docRef = doc(this.afs, this.PATH + '/' + id);
+    return await updateDoc(docRef,{
+      id: id
+    })
+  }
+
   createDepartment(department: Department) {
-    department.id = doc(collection(this.afs, 'id')).id
+    //department.id = doc(collection(this.afs, 'id')).id
     return addDoc(collection(this.afs, this.PATH), department)
   }
   

@@ -2,7 +2,7 @@ import { User } from "./user";
 
 export interface Project {
     id:string;
-    idOwner:string;
+    idOwner:User;
     name:string;
     description:string;
     type:string;
