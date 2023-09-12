@@ -44,7 +44,7 @@ export class SearchProjectsComponent {
     this.loadInstitutes()
     const userLogged = this._userFBService.usuarioLogged()
     if(this.email == undefined && !userLogged) {
-      alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
+      alert('Ops, ocorreu um engano. Usuário sem seção Registrada.')
       this._router.navigate([""]);
     }else{
       this.getUser();

@@ -67,11 +67,11 @@
       <form class="example-form" [formGroup]="projectForm" (ngSubmit)="submitForm()">
           <mat-form-field class="example-full-width">
               <mat-label>Nome do Projeto</mat-label>
-              <input matInput type="text" formControlName="name" placeholder="{{projetoPraEditar?.name}}">
+              <input matInput type="text" formControlName="name" placeholder="EX. Nome do Projeto">
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Descrição do Projeto</mat-label>
-              <textarea matInput formControlName="description" placeholder="{{projetoPraEditar?.description}}"></textarea>
+              <textarea matInput formControlName="description" placeholder="EX. Projeto sobre Aprendizado de máquina ... ... ..."></textarea>
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Tipo do Projeto</mat-label>
@@ -82,14 +82,14 @@
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Participantes do Projeto</mat-label>
-              <input matInput type="text" formControlName="members" placeholder="{{projetoPraEditar?.members}}">
+              <input matInput type="text" formControlName="members" placeholder="EX. Januário da Silva, Joana de Souza">
             </mat-form-field>
               <div>
                   <label>PDF File</label>
                   <input type="file" (change)="uploadFile($event)" formControlName="docURL">
               </div>
               <div class="example-button-row">
-                  <button type="submit" color="accent" mat-raised-button>Editar Projeto</button>
+                  <button type="submit" color="accent" mat-raised-button>Salvar Alterações</button>
               </div>
       </form>
   </div>

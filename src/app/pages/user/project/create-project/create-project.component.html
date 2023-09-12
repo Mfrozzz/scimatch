@@ -67,16 +67,16 @@
       <form class="example-form" [formGroup]="projectForm" (ngSubmit)="submitForm()">
           <mat-form-field class="example-full-width">
               <mat-label>Nome do Projeto</mat-label>
-              <input matInput type="text" formControlName="name">
+              <input matInput type="text" formControlName="name" placeholder="EX. Nome do Projeto">
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Descrição do Projeto</mat-label>
-              <textarea matInput formControlName="description"></textarea>
+              <textarea matInput formControlName="description" placeholder="Esse projeto fala sobre ... ... ..."></textarea>
             </mat-form-field>
             <mat-form-field class="example-full-width">
               <mat-label>Tipo do Projeto</mat-label>
-              <mat-select formControlName="type">
-                <mat-option value="none">None</mat-option>
+              <mat-select formControlName="type" placeholder="EX. Artigo">
+                <mat-option value="none">Nenhum Tipo Selecionado</mat-option>
                 <mat-option *ngFor="let doc of tiposDoc" [value]="doc">{{doc}}</mat-option>
               </mat-select>
             </mat-form-field>

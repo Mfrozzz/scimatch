@@ -33,7 +33,7 @@ export class ProfileComponent {
     this.email = history.state.email
     const userLogged = this._userFBService.usuarioLogged()
     if(this.email == undefined && !userLogged) {
-      alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
+      alert('Ops, ocorreu um engano. Usuário sem seção Registrada.')
       this._router.navigate([""]);
     }else{
       this.getUser();
@@ -41,17 +41,22 @@ export class ProfileComponent {
     this.loadInstitutes()
     this.loadDepartments()
     this.profileForm = this.formBuilder.group({
-      name: [this.usuario?.name, [Validators.required]],
-      academicRegister: [this.usuario?.academicRegister, [Validators.required,Validators.minLength(6),Validators.maxLength(11)]],
-      institute: [this.usuario?.institute.name,[Validators.required]],
-      department: [this.usuario?.department.name,[Validators.required]],
-      phoneNumber: [this.usuario?.phoneNumber, [Validators.required]],
+      name: ["", [Validators.required]],
+      academicRegister: ["", [Validators.required,Validators.minLength(6),Validators.maxLength(11)]],
+      institute: ["",[Validators.required]],
+      department: ["",[Validators.required]],
+      phoneNumber: ["", [Validators.required]],
       photoURL: [null]
     })
   }
 
   async getUser(){
     this.usuario = await this._userFBService?.getUserByEmail(this.email);
+    this.profileForm.controls['name'].setValue(this.usuario?.name);
+    this.profileForm.controls['academicRegister'].setValue(this.usuario?.academicRegister);
+    this.profileForm.controls['institute'].setValue(this.usuario?.institute.name);
+    this.profileForm.controls['department'].setValue(this.usuario?.department.name);
+    this.profileForm.controls['phoneNumber'].setValue(this.usuario?.phoneNumber);
     if(!this.usuario?.department || !this.usuario?.institute || !this.usuario?.phoneNumber){
       this.snackBarUni()
     }
@@ -68,7 +73,7 @@ export class ProfileComponent {
   submitForm(){
     this.isSubmitted = true;
     if(!this.profileForm.valid){
-      console.log("aqui");
+      alert("Algo de Errado aconteceu!");
     }else{
       this.edit();
     }
@@ -84,7 +89,6 @@ export class ProfileComponent {
 
   uploadFile(evento: any){
     this.imagem = evento.target.files[0];
-    console.log(this.imagem.name)
   }
 
   edit(){
@@ -105,13 +109,6 @@ export class ProfileComponent {
     }else{
       this._userFBService.updateUser(editUser)
     }
-    /*
-    if(this.FormEditProd.controls['foto'].value) {
-      await this.produtoFs.updateImg(this.imagem, produto);
-    }else {
-      await this.produtoFs.updateProduto(produto);
-    }
-    */
   }
 
   redirect(urlDirect: string) {

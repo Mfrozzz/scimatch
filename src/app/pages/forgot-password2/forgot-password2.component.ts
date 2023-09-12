@@ -4,31 +4,22 @@ import { Router } from '@angular/router';
 import { UserFBServiceService } from 'src/app/services/user-fbservice.service';
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  selector: 'app-forgot-password2',
+  templateUrl: './forgot-password2.component.html',
+  styleUrls: ['./forgot-password2.component.css']
 })
-export class ForgotPasswordComponent {
-
+export class ForgotPassword2Component {
   form_login!: FormGroup;
-
   constructor(private formBuilder: FormBuilder,private _router : Router,private _userFBService: UserFBServiceService){
 
   }
-
   ngOnInit(){
     this.form_login = this.formBuilder.group({
-      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
     })
   }
 
-  goTo2Phase(){
-    let email = this.form_login.controls['email'].value
-    this._router.navigateByUrl('/forgotPassword/'+email,{state: {email:email}})
-  }
-
   submitForm(){
-    ////////
-    this.goTo2Phase();
+    this._router.navigate(['/login'])
   }
 }

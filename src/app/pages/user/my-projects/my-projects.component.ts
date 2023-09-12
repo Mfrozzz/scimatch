@@ -31,7 +31,7 @@ export class MyProjectsComponent {
     this.email = history.state.email
     const userLogged = this._userFBService.usuarioLogged()
     if(this.email == undefined && !userLogged) {
-      alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
+      alert('Ops, ocorreu um engano. Usuário sem seção Registrada.')
       this._router.navigate([""]);
     }else{
       this.getUser();
@@ -95,7 +95,8 @@ export class MyProjectsComponent {
     let exclusão = confirm("Deseja excluir seu projeto "+projeto.name+"?")
     if(exclusão){
       await this._projectFbS.deleteProject(projeto).then(()=>{
-        alert("Projeto excluirdo com sucesso.")
+        alert("Projeto excluido com sucesso.");
+        window.location.reload();
       }).catch((error)=>{
         alert("Erro ao excluir Projeto");
         console.log(error);

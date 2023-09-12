@@ -61,7 +61,7 @@
     <form class="example-form" [formGroup]="projectForm" (ngSubmit)="submitForm(projectForm.controls['search'].value)">
         <mat-form-field class="example-full-width" color="accent">
         <span matPrefix> </span>
-        <input type="tel" matInput placeholder="Search" name= "search" formControlName="search">
+        <input type="tel" matInput placeholder="Buscar Projeto" name= "search" formControlName="search">
         <button matSuffix mat-button type="submit"><mat-icon >search</mat-icon></button>
         </mat-form-field>
         <br/>
@@ -91,7 +91,9 @@
                 <ul>
                     <li>Contato - {{projeto.idOwner.email}}</li>
                 </ul>
-                <a target="_blank" [href]="projeto.docURL"><p>Link do Projeto</p></a>
+                <div *ngIf="projeto.docURL">
+                    <a target="_blank" [href]="projeto.docURL"><p>Link do Projeto</p></a>
+                </div>
                 <div>
                     <a target="_blank" [href]="zapTarget"><button mat-flat-button color="accent" class="buttonNew" (click)="solicita(projeto.name,projeto.idOwner.phoneNumber)">Solicitar entrada<mat-icon>send</mat-icon></button></a>
                 </div>

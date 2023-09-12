@@ -32,17 +32,17 @@ export class UpdateProjectComponent {
     this.proj = history.state.proj
     const userLogged = this._userFBService.usuarioLogged()
     if(this.email == undefined && !userLogged) {
-      alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
+      alert('Ops, ocorreu um engano. Usuário sem seção Registrada.')
       this._router.navigate([""]);
     }else{
       this.getUser();
       this.projetoUser();
     }
     this.projectForm = this.formBuilder.group({
-      name: [this.projetoPraEditar?.name, [Validators.required]],
-      description: [this.projetoPraEditar?.description, [Validators.required]],
-      type: [this.projetoPraEditar?.type,[Validators.required]],
-      members: [this.projetoPraEditar?.members,[]],
+      name: ["", [Validators.required]],
+      description: ["", [Validators.required]],
+      type: ["",[Validators.required]],
+      members: ["",[]],
       docURL: [null]
     })
   }
@@ -52,7 +52,12 @@ export class UpdateProjectComponent {
   }
 
   async projetoUser(){
-    this.projetoPraEditar = await this._projFbService?.getProjByVddID(this.proj)
+    this.projetoPraEditar = await this._projFbService?.getProjByVddID(this.proj);
+    //this.profileForm.controls['name'].setValue(this.usuario?.name);
+    this.projectForm.controls['name'].setValue(this.projetoPraEditar?.name);
+    this.projectForm.controls['description'].setValue(this.projetoPraEditar?.description);
+    this.projectForm.controls['type'].setValue(this.projetoPraEditar?.type);
+    this.projectForm.controls['members'].setValue(this.projetoPraEditar?.members);
   }
 
   submitForm(){
@@ -66,16 +71,18 @@ export class UpdateProjectComponent {
 
   uploadFile(evento: any){
     this.document = evento.target.files[0];
-    console.log(this.document.name)
+    console.log(this.document.name);
   }
 
   edit(){
     if(this.projectForm.controls['docURL'].value){
-      this._projFbService.updateProj(this.document, this.projectForm.value,this.proj)
-      this.projectForm.reset()
+      this._projFbService.updateProj(this.document, this.projectForm.value,this.proj);
+      this.projectForm.reset();
+      this.redirect("myProj");
     }else{
-      this._projFbService.updateProject(this.projectForm.value,this.proj)
-      this.projectForm.reset()
+      this._projFbService.updateProject(this.projectForm.value,this.proj);
+      this.projectForm.reset();
+      this.redirect("myProj");
     }
   }
 

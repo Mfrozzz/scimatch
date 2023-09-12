@@ -12,6 +12,7 @@ import { HomeAdminComponent } from './pages/admin/home-admin/home-admin.componen
 import { CreateProjectComponent } from './pages/user/project/create-project/create-project.component';
 import { UpdateProjectComponent } from './pages/user/project/update-project/update-project.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ForgotPassword2Component } from './pages/forgot-password2/forgot-password2.component';
 // profile project/create search
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path:'forgotPassword',
     component:ForgotPasswordComponent
+  },
+  {
+    path:'forgotPassword/:param',
+    component:ForgotPassword2Component
   }
 ];
 

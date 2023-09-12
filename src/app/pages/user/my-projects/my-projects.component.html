@@ -83,7 +83,9 @@
                   <ul *ngFor="let i of projeto.members">
                       <li>{{i}}</li>
                   </ul>
-                  <a [href]="projeto.docURL">Documento do Projeto</a>
+                  <div *ngIf="projeto.docURL">
+                    <a [href]="projeto.docURL">Documento do Projeto</a>
+                  </div>
                   <div>
                     <button mat-mini-fab color="accent" class="buttonNew" (click)="editarProj(projeto)"><mat-icon>edit</mat-icon></button>  
                     <button mat-mini-fab color="warn" class="buttonNew" (click)="excluirProj(projeto)"><mat-icon>delete</mat-icon></button>

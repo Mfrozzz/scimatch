@@ -12,7 +12,7 @@ import { UserFBServiceService } from 'src/app/services/user-fbservice.service';
   styleUrls: ['./create-project.component.css']
 })
 export class CreateProjectComponent {
-  tiposDoc: string[]=["TCC","Extensão","Artigo","Relatório","Monografia","Tese","Dissertação"];
+  tiposDoc: string[]=["TCC","Extensão","Artigo","Relatório","Monografia","Tese","Dissertação","Inovação"];
   projectForm!:FormGroup;
   document:any;
   isSubmitted: boolean = false;
@@ -30,7 +30,7 @@ export class CreateProjectComponent {
     this.email = history.state.email
     const userLogged = this._userFBService.usuarioLogged()
     if(this.email == undefined && !userLogged) {
-      alert('Ops, ocorreu um engano tente inserir novamente as informações da primeira etapa!')
+      alert('Ops, ocorreu um engano. Usuário sem seção Registrada.')
       this._router.navigate([""]);
     }else{
       this.getUser();
@@ -61,26 +61,25 @@ export class CreateProjectComponent {
   submitForm(){
     this.isSubmitted = true;
     if(!this.projectForm.valid){
-      console.log("aqui");
+      alert("Algo de errado Aconteceu! Preencha os campos corretamente.")
     }else{
       this.create();
-      alert('foi')
     }
   }
 
   uploadFile(evento: any){
     this.docs = evento.target.files[0];
-    console.log(this.docs.name)
   }
 
   async create(){
     if(this.projectForm.controls['docURL'].value){
       await this.projectFBservice.enviarProject(this.docs,this.projectForm.value,this.usuario);
       this.projectForm.reset();
+      this.redirect('myProj');
     }else{
       await this.projectFBservice.createProjectMaster(this.projectForm.value,this.usuario!);
       this.projectForm.reset();
-      //this.projectFBservice.createProject(this.projectForm.value)
+      this.redirect('myProj');
     }
   }
 

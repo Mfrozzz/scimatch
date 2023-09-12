@@ -86,7 +86,8 @@ export class UserFBServiceService {
       phoneNumber: user.phoneNumber,
       photoURL: user.photoURL
     }).then(()=>{
-      alert('Usuário alterado com sucesso.')
+      alert('Usuário alterado com sucesso.');
+      window.location.reload();
     }).catch(err => alert('Erro ao atualizar user!'));
   }
 
