@@ -1,5 +1,5 @@
 import { Injectable,inject } from '@angular/core';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, sendPasswordResetEmail, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { createUserWithEmailAndPassword, getAuth, signOut, updateProfile } from 'firebase/auth';
 import { Observable } from 'rxjs';
 import {
@@ -163,6 +163,14 @@ export class UserFBServiceService {
           this.updateUser(usuario)
         });
       })
+  }
+
+  async forgotPassword1(email: string){
+    await sendPasswordResetEmail(this.auth,email).then(()=>{
+      alert("Link para alterar a senha disponível em :"+email+" verifique seu email.")
+    }).catch(()=>{
+      alert("E-mail inválido.")
+    })
   }
 
   async createUser(user: User) {

@@ -49,7 +49,7 @@ export class HomeAdminComponent {
     }else{
       this.getUser();
       if(!this.usuario?.department || !this.usuario.institute || !this.usuario.phoneNumber){
-        this.snackBarUni()
+        //this.snackBarUni()
       }
     }
     this.form_uni = this.formBuilder1.group({

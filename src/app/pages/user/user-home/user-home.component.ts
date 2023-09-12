@@ -54,6 +54,7 @@ export class UserHomeComponent {
 
   private async execute(){
     await this.solicitationfb.createSolicitationMaster(this.solicitationForm.value,this.usuario?.id);
+    this.redirect("myProj");
   }
 
   redirect(urlDirect: string) {

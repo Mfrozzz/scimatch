@@ -23,3 +23,4 @@ export class ForgotPassword2Component {
     this._router.navigate(['/login'])
   }
 }
+//não usado

@@ -50,13 +50,14 @@ export class SolicitationFbServiceService {
       //usuario.id = document.id
       this.updateSolID(document.id)
       alert("solicitação enviada com sucesso!");
+      alert("Assim que sua solicitação for atendida, nossa equipe entrará em contado via email. Atenciosamente: equipe SciMatch.")
       //this._router.navigate(['/login']);
     })
     .catch((error) => {
-      alert("Ocorreu um erro durante o cadastro, tente novamente!")
+      alert("Ocorreu um erro durante a solicitação, tente novamente!")
       return error
     }).catch((error) => {
-      alert("Ocorreu um erro durante o cadastro, tente novamente! " + error)
+      alert("Ocorreu um erro durante a solicitação, tente novamente! " + error)
       return error
   })
   }

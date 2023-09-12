@@ -9,7 +9,7 @@ import { UserFBServiceService } from 'src/app/services/user-fbservice.service';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent {
-
+  isSubmitted: boolean = false;
   form_login!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,private _router : Router,private _userFBService: UserFBServiceService){
@@ -22,13 +22,16 @@ export class ForgotPasswordComponent {
     })
   }
 
-  goTo2Phase(){
-    let email = this.form_login.controls['email'].value
-    this._router.navigateByUrl('/forgotPassword/'+email,{state: {email:email}})
-  }
-
   submitForm(){
     ////////
-    this.goTo2Phase();
+    let e = this.form_login.controls['email'].value
+    console.log(e)
+    this.isSubmitted = true;
+    if(!this.form_login.valid){
+      alert("E-mail inválido")
+    }else{
+      this._userFBService.forgotPassword1(e);
+      this._router.navigate(['/login']);
+    }
   }
 }
